@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "999015243587",
+    "firebase_url": "https://rateus-6c725.firebaseio.com",
+    "project_id": "rateus-6c725",
+    "storage_bucket": "rateus-6c725.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:999015243587:android:306bc8c081383388",
+        "android_client_info": {
+          "package_name": "pi.rateusteam.rateus"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "999015243587-l2skealqlerakpf7kgvj9eho01s67udk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "pi.rateusteam.rateus",
+            "certificate_hash": "fbac3401ab941723ae8bea957e2cafce0cf266c0"
+          }
+        },
+        {
+          "client_id": "999015243587-ak1ngmb7pb8m5hc16adeqqkcdbhp88ec.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkyzEvr-DtBqKKsCiykT87nNebxohqB2c"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "999015243587-ak1ngmb7pb8m5hc16adeqqkcdbhp88ec.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

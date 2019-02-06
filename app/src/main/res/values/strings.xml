@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">RateUs</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtContrasenya">Contraseña</string>
+    <string name="txtConfContrasenya">Confirmar contraseña</string>
+    <string name="txtTitulo">Titulo</string>
+    <string name="txtDescripcion">Descripcion</string>
+    <string name="btnGuardar">Guardar</string>
+    <string name="btnCancelar">Cancelar</string>
+    <string name="btnEntrar">Entrar</string>
+    <string name="txtConfirmarContrasenya">Confirmar contraseña</string>
+
+</resources>
