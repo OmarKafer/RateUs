@@ -3,13 +3,15 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/fondo_registro"
     tools:context=".Fragments.RegistroFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="16dp"
+        >
 
         <ImageView
             android:layout_width="200dp"
@@ -18,15 +20,30 @@
             android:src="@drawable/common_full_open_on_phone"
             android:layout_marginBottom="10dp"
             android:layout_gravity="center_horizontal"
+
             />
 
-        <EditText
-            android:id="@+id/txtEmail"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:inputType="textEmailAddress"
-            android:text=""
-            android:hint="@string/txtEmail"/>
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@android:drawable/ic_dialog_email" />
+
+            <EditText
+                android:id="@+id/txtEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/txtEmail"
+                android:inputType="textEmailAddress"
+                android:text=""
+                android:textColor="#ffffff"
+                android:textColorHint="#ffffff" />
+
+        </LinearLayout>
 
         <EditText
             android:id="@+id/txtContrasenya"
@@ -34,46 +51,66 @@
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:text=""
-            android:hint="@string/txtContrasenya"/>
+            android:hint="@string/txtContrasenya"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"/>/>
         <EditText
             android:id="@+id/txtConfirmarContrasenya"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:text=""
-            android:hint="@string/txtConfirmarContrasenya"/>
+            android:hint="@string/txtConfirmarContrasenya"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"/>/>
         <EditText
             android:id="@+id/txtTitulo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text=""
-            android:hint="@string/txtTitulo"/>
+            android:hint="@string/txtTitulo"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"/>/>
         <EditText
             android:id="@+id/txtDescripcion"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPersonName"
             android:text=""
-            android:hint="@string/txtDescripcion"/>
+            android:hint="@string/txtDescripcion"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"
+            />/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:gravity="center">
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="10dp"
+            >
 
             <Button
                 android:id="@+id/btnGuardar"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/boton_guardar"
                 android:text="@string/btnGuardar"
-                android:background="@drawable/boton_guardar"/>
+                android:textAllCaps="false"
+                android:layout_marginBottom="5dp"/>
             <Button
                 android:id="@+id/btnCancelar"
-                android:layout_width="wrap_content"
+                android:textAllCaps="false"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/btnCancelar" />
+                android:layout_weight="1"
+                android:text="@string/btnCancelar"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/boton_cancelar"
+                />
+
         </LinearLayout>
 
 

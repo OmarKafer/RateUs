@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/login_background"
     tools:context=".Fragments.LoginFragment">
 
     <LinearLayout
@@ -15,46 +16,88 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_weight="0.25">
+            android:layout_weight="0.25"
+            android:orientation="vertical">
 
-            <EditText
-                android:id="@+id/txtEmail"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtEmail"
-                android:inputType="textEmailAddress" />
+                android:orientation="horizontal"
+                android:paddingLeft="30px"
+                android:paddingRight="30px">
 
-            <EditText
-                android:id="@+id/txtContrasenya"
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_dialog_email"
+                    android:layout_marginRight="10dp"/>
+
+                <EditText
+                    android:id="@+id/txtEmail"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+
+                    android:background="#28ffffff"
+                    android:hint="@string/txtEmail"
+                    android:inputType="textEmailAddress"
+                    android:paddingLeft="10px"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
+
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/txtContrasenya"
-                android:inputType="textPassword"
-                android:text="" />
+                android:orientation="horizontal"
+                android:paddingLeft="37px"
+                android:paddingRight="30px">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@android:drawable/ic_lock_idle_lock"
+                    android:layout_marginRight="13dp"/>
+
+                <EditText
+                    android:id="@+id/txtContrasenya"
+                    android:layout_gravity="center"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/et_background"
+                    android:hint="@string/txtContrasenya"
+                    android:inputType="textPassword"
+                    android:text=""
+                    android:paddingLeft="10px"
+                    android:textColorHint="#FFFFFF"
+                    android:textColor="#FFFFFF"/>
+
+            </LinearLayout>
 
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal"
-            android:layout_weight="0.75">
+            android:layout_weight="0.75"
+            android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btnEntrar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.20"
-                android:textSize="18dp"
                 android:text="@string/btnEntrar"
-                />
+                android:textSize="18dp" />
+
             <ImageButton
                 android:id="@+id/btnAnyadir"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="0.80"
-                android:src="@android:drawable/ic_input_add"/>
+                android:src="@android:drawable/ic_input_add" />
         </LinearLayout>
 
     </LinearLayout>
