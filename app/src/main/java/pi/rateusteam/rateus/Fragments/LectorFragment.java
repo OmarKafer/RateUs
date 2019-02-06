@@ -2,8 +2,10 @@ package pi.rateusteam.rateus.Fragments;
 
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.hardware.Camera;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
@@ -24,6 +26,7 @@ import com.google.android.gms.vision.barcode.Barcode;
 import com.google.android.gms.vision.barcode.BarcodeDetector;
 
 import java.io.IOException;
+import java.lang.reflect.Field;
 
 import pi.rateusteam.rateus.R;
 
@@ -109,6 +112,7 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
         btnOcho.setOnClickListener(this);
         btnNueve.setOnClickListener(this);
         btnLimpiar.setOnClickListener(this);
+        cameraView.setOnClickListener(this);
 
         initQR();
 
@@ -246,6 +250,9 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         int campoRellenar;
         switch (v.getId()) {
+            case R.id.camera_view:
+                    cameraFocus(cameraSource, Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
+                break;
             case R.id.btnCero:
                 campoRellenar = comprobarCampos();
                 if(campoRellenar != 0) {
@@ -440,5 +447,31 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
                 limpiarCampos();
                 break;
         }
+    }
+
+    private static boolean cameraFocus(@NonNull CameraSource cameraSource, @NonNull String focusMode) {
+        Field[] declaredFields = CameraSource.class.getDeclaredFields();
+
+        for (Field field : declaredFields) {
+            if (field.getType() == Camera.class) {
+                field.setAccessible(true);
+                try {
+                    Camera camera = (Camera) field.get(cameraSource);
+                    if (camera != null) {
+                        Camera.Parameters params = camera.getParameters();
+                        params.setFocusMode(focusMode);
+                        camera.setParameters(params);
+                        return true;
+                    }
+
+                    return false;
+                } catch (IllegalAccessException e) {
+                    e.printStackTrace();
+                }
+
+                break;
+            }
+        }
+        return false;
     }
 }
