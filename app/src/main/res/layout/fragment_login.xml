@@ -17,7 +17,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.25"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:gravity="center">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -27,8 +28,8 @@
                 android:paddingRight="30px">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
                     android:src="@android:drawable/ic_dialog_email"
                     android:layout_marginRight="10dp"/>
 
@@ -36,12 +37,11 @@
                     android:id="@+id/txtEmail"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-
+                    android:layout_height="50dp"
                     android:background="#28ffffff"
                     android:hint="@string/txtEmail"
                     android:inputType="textEmailAddress"
-                    android:paddingLeft="10px"
+                    android:paddingLeft="30px"
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"/>
 
@@ -53,28 +53,41 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:paddingLeft="37px"
-                android:paddingRight="30px">
+                android:paddingRight="30px"
+                android:layout_marginTop="50px">
 
                 <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_width="50dp"
                     android:src="@android:drawable/ic_lock_idle_lock"
-                    android:layout_marginRight="13dp"/>
+                    android:layout_marginRight="7dp"/>
 
                 <EditText
                     android:id="@+id/txtContrasenya"
                     android:layout_gravity="center"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/et_background"
+                    android:layout_height="50dp"
+                    android:background="#28ffffff"
                     android:hint="@string/txtContrasenya"
                     android:inputType="textPassword"
                     android:text=""
-                    android:paddingLeft="10px"
+                    android:paddingLeft="30px"
                     android:textColorHint="#FFFFFF"
                     android:textColor="#FFFFFF"/>
 
             </LinearLayout>
+
+            <Button
+                android:id="@+id/btnEntrar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40px"
+                android:layout_marginRight="35px"
+                android:layout_marginTop="30dp"
+                android:text="@string/btnEntrar"
+                android:textColor="#ffffff"
+                android:textSize="18dp"
+                android:background="@drawable/btn_entrar"/>
 
         </LinearLayout>
 
@@ -84,20 +97,12 @@
             android:layout_weight="0.75"
             android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/btnEntrar"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.20"
-                android:text="@string/btnEntrar"
-                android:textSize="18dp" />
 
             <ImageButton
                 android:id="@+id/btnAnyadir"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="0.80"
-                android:src="@android:drawable/ic_input_add" />
+                android:layout_weight="1"/>
         </LinearLayout>
 
     </LinearLayout>
