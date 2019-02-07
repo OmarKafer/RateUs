@@ -4,12 +4,14 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -85,23 +87,39 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnEntrar:
-                ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
-                /*mAuth.signInWithEmailAndPassword(txtEmail.getText().toString(), txtContrasenya.getText().toString())
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
-                                } else {
-                                    // Log in no funciona
-                                }
-                            }
-                        });*/
+                if (comprobarCampos()) {
+                    login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                } else {
+                    Toast.makeText(getContext(), "ERROR: Comprueba los campos", Toast.LENGTH_SHORT).show();
+                }
                 break;
 
             case R.id.btnAnyadir:
-                //((NavigationHost) getActivity()).navigateTo(new RegistroFragment(), false);
+                ((NavigationHost) getActivity()).navigateTo(new RegistroFragment(), false);
                 break;
+        }
+    }
+
+    private void login(String email, String contrasenya) {
+        mAuth.signInWithEmailAndPassword(email, contrasenya)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
+                        } else {
+                            Log.d("Omar", "El login no funciona");
+                        }
+                    }
+                });
+    }
+
+    private boolean comprobarCampos() {
+        if(txtEmail.getText().toString().compareToIgnoreCase("") == 0
+                || txtContrasenya.getText().toString().compareToIgnoreCase("") == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
