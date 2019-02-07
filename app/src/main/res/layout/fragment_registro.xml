@@ -45,7 +45,9 @@
                 android:inputType="textEmailAddress"
                 android:text=""
                 android:textColor="#ffffff"
-                android:textColorHint="#ffffff" />
+                android:textColorHint="#ffffff"
+                android:focusable="true"
+                android:focusableInTouchMode="true"/>
 
         </LinearLayout>
 
@@ -70,7 +72,9 @@
             android:text=""
             android:hint="@string/txtContrasenya"
             android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
     </LinearLayout>
 
@@ -95,7 +99,9 @@
             android:text=""
             android:hint="@string/txtConfirmarContrasenya"
             android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"/>
+            android:textColor="#FFFFFF"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
     </LinearLayout>
         <EditText
@@ -106,7 +112,9 @@
             android:text=""
             android:hint="@string/txtTitulo"
             android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"/>/>
+            android:textColor="#FFFFFF"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <EditText
             android:id="@+id/txtDescripcion"
@@ -117,21 +125,22 @@
             android:maxLines="10"
             android:text=""
             android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF" />
+            android:textColorHint="#FFFFFF"
+            android:focusable="true"
+            android:focusableInTouchMode="true"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center"
-            android:padding="10dp"
-            >
+            android:gravity="center">
 
             <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#ffffff"
                 android:background="@drawable/btn_entrar"
                 android:text="@string/btnGuardar"
                 android:layout_marginRight="5dp"/>
@@ -140,6 +149,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:textColor="#ffffff"
                 android:text="@string/btnCancelar"
                 android:layout_marginLeft="5dp"
                 android:background="@drawable/btn_entrar"
