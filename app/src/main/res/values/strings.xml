@@ -9,5 +9,6 @@
     <string name="btnCancelar">Cancelar</string>
     <string name="btnEntrar">Entrar</string>
     <string name="txtConfirmarContrasenya">Confirmar contraseña</string>
+    <string name="txtCrearProyecto">CREAR MI PROYECTO</string>
 
 </resources>
