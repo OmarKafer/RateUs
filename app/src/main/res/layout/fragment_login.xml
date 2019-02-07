@@ -30,7 +30,9 @@
                 android:orientation="horizontal"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:paddingTop="30dp">
+                android:paddingTop="30dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <ImageView
                     android:layout_height="50dp"
@@ -48,9 +50,7 @@
                     android:inputType="textEmailAddress"
                     android:paddingLeft="8dp"
                     android:textColor="#FFFFFF"
-                    android:textColorHint="#FFFFFF"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true" />
+                    android:textColorHint="#FFFFFF"/>
 
             </LinearLayout>
 
@@ -61,7 +61,9 @@
                 android:orientation="horizontal"
                 android:paddingLeft="18dp"
                 android:paddingRight="20dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true">
 
                 <ImageView
                     android:layout_height="55dp"
@@ -80,9 +82,7 @@
                     android:text=""
                     android:paddingLeft="8dp"
                     android:textColorHint="#FFFFFF"
-                    android:textColor="#FFFFFF"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true"/>
+                    android:textColor="#FFFFFF"/>
 
             </LinearLayout>
 
