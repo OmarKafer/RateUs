@@ -94,7 +94,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         switch(v.getId()) {
             case R.id.btnEntrar:
                 if (comprobarCampos()) {
-                    login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                    ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false); // TEMPORAL PARA PRUEBAS
+                    //login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
                 } else {
                     ocultarTeclado();
                     gestorErrores.mostrarError("ERROR: Comprueba los campos"); // PONER EN STRINGS
