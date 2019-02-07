@@ -8,9 +8,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -19,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
 
@@ -34,8 +37,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText txtEmail;
     private EditText txtContrasenya;
     private Button btnEntrar;
-    private ImageButton btnAnyadir;
+    private TextView btnAnyadir;
     private FirebaseAuth mAuth;
+    private GestorErrores gestorErrores;
 
 
 
@@ -69,6 +73,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
 
+        gestorErrores = new GestorErrores(getContext());
+
         return v;
     }
 
@@ -90,7 +96,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                 if (comprobarCampos()) {
                     login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
                 } else {
-                    Toast.makeText(getContext(), "ERROR: Comprueba los campos", Toast.LENGTH_SHORT).show();
+                    ocultarTeclado();
+                    gestorErrores.mostrarError("ERROR: Comprueba los campos"); // PONER EN STRINGS
                 }
                 break;
 
@@ -108,10 +115,16 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
                         if (task.isSuccessful()) {
                             ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
                         } else {
-                            Log.d("Omar", "El login no funciona");
+                            ocultarTeclado();
+                            gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
                         }
                     }
                 });
+    }
+
+    private void ocultarTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(txtContrasenya.getWindowToken(), 0);
     }
 
     private boolean comprobarCampos() {
