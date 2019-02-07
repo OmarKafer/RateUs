@@ -4,12 +4,16 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -17,6 +21,7 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 
+import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
 
@@ -32,8 +37,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText txtEmail;
     private EditText txtContrasenya;
     private Button btnEntrar;
-    private ImageButton btnAnyadir;
+    private TextView btnAnyadir;
     private FirebaseAuth mAuth;
+    private GestorErrores gestorErrores;
 
 
 
@@ -67,6 +73,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
 
         mAuth = FirebaseAuth.getInstance();
 
+        gestorErrores = new GestorErrores(getContext());
+
         return v;
     }
 
@@ -85,23 +93,46 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId()) {
             case R.id.btnEntrar:
-                ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
-                /*mAuth.signInWithEmailAndPassword(txtEmail.getText().toString(), txtContrasenya.getText().toString())
-                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
-                                } else {
-                                    // Log in no funciona
-                                }
-                            }
-                        });*/
+                if (comprobarCampos()) {
+                    login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                } else {
+                    ocultarTeclado();
+                    gestorErrores.mostrarError("ERROR: Comprueba los campos"); // PONER EN STRINGS
+                }
                 break;
 
             case R.id.btnAnyadir:
-                //((NavigationHost) getActivity()).navigateTo(new RegistroFragment(), false);
+                ((NavigationHost) getActivity()).navigateTo(new RegistroFragment(), false);
                 break;
+        }
+    }
+
+    private void login(String email, String contrasenya) {
+        mAuth.signInWithEmailAndPassword(email, contrasenya)
+                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
+                        } else {
+                            ocultarTeclado();
+                            gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
+                        }
+                    }
+                });
+    }
+
+    private void ocultarTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(txtContrasenya.getWindowToken(), 0);
+    }
+
+    private boolean comprobarCampos() {
+        if(txtEmail.getText().toString().compareToIgnoreCase("") == 0
+                || txtContrasenya.getText().toString().compareToIgnoreCase("") == 0) {
+            return false;
+        } else {
+            return true;
         }
     }
 
