@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/background"
-    tools:context=".Fragments.RegistroFragment">
+    tools:context=".Fragments.RegistroFragment"
+    android:background="@drawable/background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,150 +12,150 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:text="Seleccionar Imagen"
-            android:src="@drawable/common_full_open_on_phone"
-            android:layout_marginBottom="10dp"
-            android:layout_gravity="center_horizontal"
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
 
-            />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/txtCrearProyecto"
+                android:textSize="15dp"
+                android:textColor="#FFFFFF"/>
+
+            <ImageButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"/>
+        </LinearLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="30dp"
             android:paddingRight="30dp"
             android:focusable="true"
             android:focusableInTouchMode="true"
-            >
+            android:layout_marginTop="30dp">
 
-            <ImageView
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@android:drawable/ic_dialog_email"
-                android:paddingRight="10dp"/>
 
             <EditText
                 android:id="@+id/txtEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:hint="@string/txtEmail"
+                android:drawableRight="@android:drawable/ic_dialog_email"
+                android:drawablePadding="5dp"
+                android:background="#28ffffff"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
                 android:inputType="textEmailAddress"
                 android:text=""
-                android:textColor="#ffffff"
-                android:textColorHint="#ffffff"
-                />
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp" />
+
+            <EditText
+                android:id="@+id/txtContrasenya"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:text=""
+                android:drawableRight="@android:drawable/ic_lock_idle_lock"
+                android:hint="@string/txtContrasenya"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="#28ffffff"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtConfirmarContrasenya"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPassword"
+                android:text=""
+                android:drawableRight="@android:drawable/ic_lock_idle_lock"
+                android:hint="@string/txtConfirmarContrasenya"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:background="#28ffffff"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:inputType="textPersonName"
+                android:text=""
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:hint="@string/txtTitulo"
+                android:background="#28ffffff"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="20dp"/>
+
+            <EditText
+                android:id="@+id/txtDescripcion"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:hint="@string/txtDescripcion"
+                android:inputType="textMultiLine|text"
+                android:maxLines="10"
+                android:text=""
+                android:background="#28ffffff"
+                android:textColorHint="#FFFFFF"
+                android:textColor="#FFFFFF"
+                android:gravity="top|left"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:layout_marginTop="20dp"/>
+
 
         </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingRight="30dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@android:drawable/ic_lock_idle_lock"
-            android:paddingRight="10dp"
-            />
-
-        <EditText
-            android:id="@+id/txtContrasenya"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:text=""
-            android:hint="@string/txtContrasenya"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-           />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:paddingRight="30dp"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <ImageView
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:src="@android:drawable/ic_lock_idle_lock"
-            android:paddingRight="10dp"
-            />
-
-        <EditText
-            android:id="@+id/txtConfirmarContrasenya"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPassword"
-            android:text=""
-            android:hint="@string/txtConfirmarContrasenya"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            />
-
-    </LinearLayout>
-        <EditText
-            android:id="@+id/txtTitulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textPersonName"
-            android:text=""
-            android:hint="@string/txtTitulo"
-            android:textColorHint="#FFFFFF"
-            android:textColor="#FFFFFF"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
-
-        <EditText
-            android:id="@+id/txtDescripcion"
-            android:layout_width="match_parent"
-            android:layout_height="100dp"
-            android:hint="@string/txtDescripcion"
-            android:inputType="textMultiLine|text"
-            android:maxLines="10"
-            android:text=""
-            android:textColor="#FFFFFF"
-            android:textColorHint="#FFFFFF"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal"
-            android:gravity="center">
+            android:gravity="center"
+            android:paddingLeft="30dp"
+            android:paddingRight="30dp"
+            android:layout_marginTop="20dp">
 
             <Button
                 android:id="@+id/btnGuardar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#ffffff"
+                android:textColor="#FFFFFF"
                 android:background="@drawable/btn_entrar"
                 android:text="@string/btnGuardar"
                 android:layout_marginRight="5dp"/>
+
             <Button
                 android:id="@+id/btnCancelar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:textColor="#ffffff"
+                android:textColor="#FFFFFF"
                 android:text="@string/btnCancelar"
                 android:layout_marginLeft="5dp"
-                android:background="@drawable/btn_entrar"
-                />
+                android:background="@drawable/btn_entrar" />
 
         </LinearLayout>
 
