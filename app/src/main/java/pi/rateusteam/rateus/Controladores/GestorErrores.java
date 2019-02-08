@@ -14,4 +14,8 @@ public class GestorErrores {
     public void mostrarError(String error) {
         Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
     }
+
+    public void mostrarMensaje(String mensaje) {
+        Toast.makeText(context, mensaje, Toast.LENGTH_SHORT).show();
+    }
 }
