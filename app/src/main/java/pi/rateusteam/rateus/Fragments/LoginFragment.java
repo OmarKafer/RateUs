@@ -19,6 +19,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 
 import pi.rateusteam.rateus.Controladores.GestorErrores;
+import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
 
@@ -35,10 +36,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     private EditText txtContrasenya;
     private Button btnEntrar;
     private TextView btnAnyadir;
-    private FirebaseAuth mAuth;
+
     private GestorErrores gestorErrores;
-
-
+    private GestorFirebase gestorFirebase;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -68,8 +68,8 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         btnEntrar.setOnClickListener(this);
         btnAnyadir.setOnClickListener(this);
 
-        mAuth = FirebaseAuth.getInstance();
 
+        gestorFirebase = new GestorFirebase(getActivity());
         gestorErrores = new GestorErrores(getContext());
         return v;
     }
@@ -90,8 +90,9 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
         switch(v.getId()) {
             case R.id.btnEntrar:
                 if (comprobarCampos()) {
-                    ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false); // TEMPORAL PARA PRUEBAS
-                    //login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                    //((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false); // TEMPORAL PARA PRUEBAS
+                    ocultarTeclado();
+                    gestorFirebase.login(txtEmail.getText().toString(), txtContrasenya.getText().toString());
                 } else {
                     ocultarTeclado();
                     gestorErrores.mostrarError("ERROR: Comprueba los campos"); // PONER EN STRINGS
@@ -105,18 +106,7 @@ public class LoginFragment extends Fragment implements View.OnClickListener {
     }
 
     private void login(String email, String contrasenya) {
-        mAuth.signInWithEmailAndPassword(email, contrasenya)
-                .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            ((NavigationHost) getActivity()).navigateTo(new LectorFragment(), false);
-                        } else {
-                            ocultarTeclado();
-                            gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
-                        }
-                    }
-                });
+
     }
 
     private void ocultarTeclado() {

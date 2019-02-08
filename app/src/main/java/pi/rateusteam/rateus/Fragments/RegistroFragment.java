@@ -6,9 +6,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import pi.rateusteam.rateus.Controladores.GestorErrores;
+import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
 
@@ -23,6 +26,9 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
 
     private EditText txtEmail, txtContrasenya, txtConfirmarContrasenya, txtTitulo, txtDescripcion;
     private Button btnGuardar, btnCancelar;
+
+    private GestorErrores gestorErrores;
+    private GestorFirebase gestorFirebase;
 
 
     public RegistroFragment() {
@@ -53,6 +59,9 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
         btnCancelar = v.findViewById(R.id.btnCancelar);
         btnGuardar.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
+
+        gestorFirebase = new GestorFirebase(getActivity());
+        gestorErrores = new GestorErrores(getContext());
         return v;
     }
 
@@ -68,13 +77,49 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
+        ocultarTeclado();
         switch (v.getId()) {
             case R.id.btnGuardar:
-                // Guardar registro
+                if(comprobarCampos()) {
+                    if(comprobarContrasenyas()) {
+                        gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                    } else {
+                        // Contraseñas no coinciden
+                        gestorErrores.mostrarError("ERROR: Las contraseñas no coinciden"); // PONER EN STRINGS
+                    }
+                } else {
+                    gestorErrores.mostrarError("ERROR: Compruebe los campos"); // PONER EN STRINGS
+                }
                 break;
             case R.id.btnCancelar:
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
                 break;
         }
     }
+
+    private boolean comprobarCampos() {
+        if(txtEmail.getText().toString().compareToIgnoreCase("") == 0
+                || txtContrasenya.getText().toString().compareToIgnoreCase("") == 0
+                || txtConfirmarContrasenya.getText().toString().compareToIgnoreCase("") == 0
+                || txtTitulo.getText().toString().compareToIgnoreCase("") == 0
+                || txtDescripcion.getText().toString().compareToIgnoreCase("") == 0) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
+    public boolean comprobarContrasenyas() {
+        if(txtContrasenya.getText().toString().compareToIgnoreCase(txtConfirmarContrasenya.getText().toString()) == 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    private void ocultarTeclado() {
+        InputMethodManager inputMethodManager = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        inputMethodManager.hideSoftInputFromWindow(txtContrasenya.getWindowToken(), 0);
+    }
+
 }
