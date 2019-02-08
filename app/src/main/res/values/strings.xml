@@ -1,14 +1,18 @@
 <resources>
     <string name="app_name">RateUs</string>
-    <string name="txtEmail">  Email</string>
+    <string name="txtEmail">Email</string>
     <string name="txtContrasenya">Contraseña</string>
     <string name="txtConfContrasenya">Confirmar contraseña</string>
-    <string name="txtTitulo">Titulo</string>
-    <string name="txtDescripcion">Descripcion</string>
+    <string name="txtTitulo">Título</string>
+    <string name="txtDescripcion">Descripción</string>
     <string name="btnGuardar">Guardar</string>
     <string name="btnCancelar">Cancelar</string>
     <string name="btnEntrar">Entrar</string>
     <string name="txtConfirmarContrasenya">Confirmar contraseña</string>
-    <string name="txtCrearProyecto">CREAR MI PROYECTO</string>
+    <string name="txtCrearProyecto">O CREAR PROYECTO</string>
+    <string name="btnRegistro">REGISTRAR</string>
+    <string name="txtCrearProyecto2">CREAR PROYECTO</string>
+
+
 
 </resources>

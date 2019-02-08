@@ -104,15 +104,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="0.75"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
 
             <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"/>
 
             <TextView
-                android:id="@+id/btnAnyadir"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/txtCrearProyecto"
@@ -122,9 +123,24 @@
             <ImageButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"/>
+                android:layout_weight="1"
+                android:layout_marginTop="1dp"/>
+
         </LinearLayout>
 
+
+        <Button
+            android:id="@+id/btnAnyadir"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="70dp"
+            android:text="@string/btnRegistro"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:background="@drawable/btn_entrar"/>
 
 
     </LinearLayout>
