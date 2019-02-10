@@ -63,9 +63,11 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         btnGuardar = v.findViewById(R.id.btnGuardar);
         btnCancelar = v.findViewById(R.id.btnCancelar);
+        btnImagen = v.findViewById(R.id.btnImagen);
         btnGuardar.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
-
+        btnImagen.setOnClickListener(this);
+        
         gestorFirebase = new GestorFirebase(getActivity());
         gestorErrores = new GestorErrores(getContext());
         return v;
