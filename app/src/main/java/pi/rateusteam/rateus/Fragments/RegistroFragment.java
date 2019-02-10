@@ -1,6 +1,7 @@
 package pi.rateusteam.rateus.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -9,10 +10,12 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
+import pi.rateusteam.rateus.Modelo.Proyecto;
 import pi.rateusteam.rateus.R;
 
 /**
@@ -26,9 +29,12 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
 
     private EditText txtEmail, txtContrasenya, txtConfirmarContrasenya, txtTitulo, txtDescripcion;
     private Button btnGuardar, btnCancelar;
+    private ImageView btnImagen;
 
     private GestorErrores gestorErrores;
     private GestorFirebase gestorFirebase;
+
+    private static final int ACTIVITY_IMAGEN = 1;
 
 
     public RegistroFragment() {
@@ -82,7 +88,8 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
             case R.id.btnGuardar:
                 if(comprobarCampos()) {
                     if(comprobarContrasenyas()) {
-                        gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString());
+                        Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString());
+                        gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p);
                     } else {
                         // Contraseñas no coinciden
                         gestorErrores.mostrarError("ERROR: Las contraseñas no coinciden"); // PONER EN STRINGS
@@ -94,6 +101,11 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
             case R.id.btnCancelar:
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
                 break;
+            /*case R.id.btnImagen:
+                Intent i = new Intent(Intent.ACTION_PICK);
+                i.setType("image/*");
+                startActivityForResult(i, ACTIVITY_IMAGEN);
+                break;*/
         }
     }
 

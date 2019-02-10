@@ -11,6 +11,10 @@ import com.google.firebase.auth.FirebaseAuth;
 import pi.rateusteam.rateus.Fragments.LectorFragment;
 import pi.rateusteam.rateus.Fragments.LoginFragment;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
+import pi.rateusteam.rateus.Modelo.Proyecto;
+
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class GestorFirebase {
 
@@ -38,12 +42,13 @@ public class GestorFirebase {
                 });
     }
 
-    public void registrarUsuario(String email, String contrasenya) {
+    public void registrarUsuario(String email, String contrasenya, final Proyecto p) {
         mAuth.createUserWithEmailAndPassword(email, contrasenya)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            guardarDatosProyecto(p);
                             gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");
                             mAuth.signOut();
                             ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
@@ -52,5 +57,14 @@ public class GestorFirebase {
                         }
                     }
                 });
+    }
+
+    public void guardarDatosProyecto(Proyecto p) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        database.child(getIdUsuario()).setValue(p);
+    }
+
+    public String getIdUsuario() {
+        return mAuth.getCurrentUser().getUid();
     }
 }
