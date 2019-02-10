@@ -1,5 +1,7 @@
 package pi.rateusteam.rateus.Modelo;
 
+import android.net.Uri;
+
 public class Proyecto {
 
     private String titulo;
@@ -25,4 +27,5 @@ public class Proyecto {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
+
 }

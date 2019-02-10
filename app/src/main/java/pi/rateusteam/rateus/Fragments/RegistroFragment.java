@@ -2,6 +2,7 @@ package pi.rateusteam.rateus.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.Modelo.Proyecto;
 import pi.rateusteam.rateus.R;
 
+import static android.app.Activity.RESULT_OK;
+
 /**
  * A simple {@link Fragment} subclass.
  * Activities that contain this fragment must implement the
@@ -30,6 +33,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
     private EditText txtEmail, txtContrasenya, txtConfirmarContrasenya, txtTitulo, txtDescripcion;
     private Button btnGuardar, btnCancelar;
     private ImageView btnImagen;
+    private Uri uri = null;
 
     private GestorErrores gestorErrores;
     private GestorFirebase gestorFirebase;
@@ -37,11 +41,12 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
     private static final int ACTIVITY_IMAGEN = 1;
 
 
+
     public RegistroFragment() {
         // Required empty public constructor
     }
 
-    public static RegistroFragment newInstance(String param1, String param2) {
+    public static RegistroFragment newInstance() {
         RegistroFragment fragment = new RegistroFragment();
         return fragment;
     }
@@ -67,7 +72,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
         btnGuardar.setOnClickListener(this);
         btnCancelar.setOnClickListener(this);
         btnImagen.setOnClickListener(this);
-        
+
         gestorFirebase = new GestorFirebase(getActivity());
         gestorErrores = new GestorErrores(getContext());
         return v;
@@ -91,7 +96,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
                 if(comprobarCampos()) {
                     if(comprobarContrasenyas()) {
                         Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString());
-                        gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p);
+                        gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p, uri);
                     } else {
                         // Contraseñas no coinciden
                         gestorErrores.mostrarError("ERROR: Las contraseñas no coinciden"); // PONER EN STRINGS
@@ -103,12 +108,16 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
             case R.id.btnCancelar:
                 ((NavigationHost) getActivity()).navigateTo(new LoginFragment(), false);
                 break;
-            /*case R.id.btnImagen:
-                Intent i = new Intent(Intent.ACTION_PICK);
-                i.setType("image/*");
-                startActivityForResult(i, ACTIVITY_IMAGEN);
-                break;*/
+            case R.id.btnImagen:
+                abrirGaleria();
+                break;
         }
+    }
+
+    private void abrirGaleria() {
+        Intent i = new Intent(Intent.ACTION_PICK);
+        i.setType("image/*");
+        startActivityForResult(i, ACTIVITY_IMAGEN);
     }
 
     private boolean comprobarCampos() {
@@ -134,6 +143,22 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
     private void ocultarTeclado() {
         InputMethodManager inputMethodManager = (InputMethodManager)getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(txtContrasenya.getWindowToken(), 0);
+    }
+
+    private void cargarImagen(Intent data) {
+        btnImagen.setImageURI(data.getData());
+        uri = data.getData();
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch(requestCode) {
+            case ACTIVITY_IMAGEN:
+                if(resultCode == RESULT_OK) {
+                    cargarImagen(data);
+                }
+                break;
+        }
     }
 
 }
