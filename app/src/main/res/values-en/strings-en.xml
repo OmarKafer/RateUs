@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RateUs</string>
+    <string name="txtEmail">E-mail</string>
+    <string name="txtContrasenya">Password</string>
+    <string name="txtTitulo">Title</string>
+    <string name="txtDescripcion">Description</string>
+    <string name="btnGuardar">Save</string>
+    <string name="btnCancelar">Cancel</string>
+    <string name="btnEntrar">Join</string>
+    <string name="txtConfirmarContrasenya">Confirm password</string>
+    <string name="txtCrearProyecto">OR CREATE PROJECT</string>
+    <string name="btnRegistro">REGISTER</string>
+    <string name="txtCrearProyecto2">CREATE PROJECT</string>
+
+
+</resources>
