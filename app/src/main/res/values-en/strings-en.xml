@@ -13,5 +13,11 @@
     <string name="txtCrearProyecto">OR CREATE PROJECT</string>
     <string name="btnRegistro">SIGN UP</string>
     <string name="txtCrearProyecto2">CREATE PROJECT</string>
+    <string name="txtCreatividad">Creativity and innovation of the project</string>
+    <string name="txtImplementacion">Possibilities of implementation and transferability</string>
+    <string name="txtComunicacion">Communication</string>
+    <string name="txtEscaneaTu">Scan your</string>
+    <string name="txtCodigoQR"> QR code!</string>
+    <string name="btnVotar">VOTE</string>
 
 </resources>
