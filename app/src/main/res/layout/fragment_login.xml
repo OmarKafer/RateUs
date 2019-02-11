@@ -40,7 +40,7 @@
             android:inputType="textEmailAddress"
             android:paddingLeft="8dp"
             android:textSize="20dp"
-            android:textColor="#a66978c4"
+            android:textColor="#FFFFFF"
             android:textColorHint="#4e383838" />
 
         <EditText
