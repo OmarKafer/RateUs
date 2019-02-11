@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.vision.CameraSource;
@@ -47,9 +48,7 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
     private BarcodeDetector barcodeDetector;
     private CameraSource cameraSource;
     private SurfaceView cameraView;
-    private EditText txtUno, txtDos, txtTres, txtCuatro;
-    private Button btnCero, btnUno, btnDos, btnTres, btnCuatro, btnCinco, btnSeis, btnSiete, btnOcho, btnNueve;
-    private ImageButton btnLimpiar;
+    private TextView txtCodigo;
 
 
     public LectorFragment() {
@@ -84,34 +83,8 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
             }
         }
 
-        txtUno = (EditText) v.findViewById(R.id.txtUno);
-        txtDos = (EditText) v.findViewById(R.id.txtDos);
-        txtTres = (EditText) v.findViewById(R.id.txtTres);
-        txtCuatro = (EditText) v.findViewById(R.id.txtCuatro);
+        txtCodigo = (TextView) v.findViewById(R.id.txtCodigo);
         cameraView = (SurfaceView) v.findViewById(R.id.camera_view);
-        btnCero = (Button) v.findViewById(R.id.btnCero);
-        btnUno = (Button) v.findViewById(R.id.btnUno);
-        btnDos = (Button) v.findViewById(R.id.btnDos);
-        btnTres = (Button) v.findViewById(R.id.btnTres);
-        btnCuatro = (Button) v.findViewById(R.id.btnCuatro);
-        btnCinco = (Button) v.findViewById(R.id.btnCinco);
-        btnSeis = (Button) v.findViewById(R.id.btnSeis);
-        btnSiete = (Button) v.findViewById(R.id.btnSiete);
-        btnOcho = (Button) v.findViewById(R.id.btnOcho);
-        btnNueve = (Button) v.findViewById(R.id.btnNueve);
-        btnLimpiar = (ImageButton) v.findViewById(R.id.btnLimpiar);
-
-        btnCero.setOnClickListener(this);
-        btnUno.setOnClickListener(this);
-        btnDos.setOnClickListener(this);
-        btnTres.setOnClickListener(this);
-        btnCuatro.setOnClickListener(this);
-        btnCinco.setOnClickListener(this);
-        btnSeis.setOnClickListener(this);
-        btnSiete.setOnClickListener(this);
-        btnOcho.setOnClickListener(this);
-        btnNueve.setOnClickListener(this);
-        btnLimpiar.setOnClickListener(this);
         cameraView.setOnClickListener(this);
 
         initQR();
@@ -206,33 +179,11 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
     }
 
     private void rellenarCampos(String token) {
-        if(comprobarCampos()==1) {
-            txtUno.setText(token.charAt(0)+"");
-            txtDos.setText(token.charAt(1)+"");
-            txtTres.setText(token.charAt(2)+"");
-            txtCuatro.setText(token.charAt(3)+"");
-        }
-    }
-
-    private int comprobarCampos() {
-        if (txtUno.getText().toString().compareToIgnoreCase("") == 0) {
-            return 1;
-        } else if (txtDos.getText().toString().compareToIgnoreCase("") == 0) {
-            return 2;
-        } else if (txtTres.getText().toString().compareToIgnoreCase("") == 0) {
-            return 3;
-        } else if (txtCuatro.getText().toString().compareToIgnoreCase("") == 0) {
-            return 4;
-        } else {
-            return 0;
-        }
+            txtCodigo.setText(token+"");
     }
 
     private void limpiarCampos() {
-        txtUno.setText("");
-        txtDos.setText("");
-        txtTres.setText("");
-        txtCuatro.setText("");
+        txtCodigo.setText("");
     }
 
 
@@ -252,199 +203,6 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
         switch (v.getId()) {
             case R.id.camera_view:
                     cameraFocus(cameraSource, Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
-                break;
-            case R.id.btnCero:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("0");
-                            break;
-                        case 2:
-                            txtDos.setText("0");
-                            break;
-                        case 3:
-                            txtTres.setText("0");
-                            break;
-                        case 4:
-                            txtCuatro.setText("0");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnUno:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("1");
-                            break;
-                        case 2:
-                            txtDos.setText("1");
-                            break;
-                        case 3:
-                            txtTres.setText("1");
-                            break;
-                        case 4:
-                            txtCuatro.setText("1");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnDos:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("2");
-                            break;
-                        case 2:
-                            txtDos.setText("2");
-                            break;
-                        case 3:
-                            txtTres.setText("2");
-                            break;
-                        case 4:
-                            txtCuatro.setText("2");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnTres:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("3");
-                            break;
-                        case 2:
-                            txtDos.setText("3");
-                            break;
-                        case 3:
-                            txtTres.setText("3");
-                            break;
-                        case 4:
-                            txtCuatro.setText("3");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnCuatro:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("4");
-                            break;
-                        case 2:
-                            txtDos.setText("4");
-                            break;
-                        case 3:
-                            txtTres.setText("4");
-                            break;
-                        case 4:
-                            txtCuatro.setText("4");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnCinco:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("5");
-                            break;
-                        case 2:
-                            txtDos.setText("5");
-                            break;
-                        case 3:
-                            txtTres.setText("5");
-                            break;
-                        case 4:
-                            txtCuatro.setText("5");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnSeis:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("6");
-                            break;
-                        case 2:
-                            txtDos.setText("6");
-                            break;
-                        case 3:
-                            txtTres.setText("6");
-                            break;
-                        case 4:
-                            txtCuatro.setText("6");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnSiete:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("7");
-                            break;
-                        case 2:
-                            txtDos.setText("7");
-                            break;
-                        case 3:
-                            txtTres.setText("7");
-                            break;
-                        case 4:
-                            txtCuatro.setText("7");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnOcho:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("8");
-                            break;
-                        case 2:
-                            txtDos.setText("8");
-                            break;
-                        case 3:
-                            txtTres.setText("8");
-                            break;
-                        case 4:
-                            txtCuatro.setText("8");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnNueve:
-                campoRellenar = comprobarCampos();
-                if(campoRellenar != 0) {
-                    switch (campoRellenar) {
-                        case 1:
-                            txtUno.setText("9");
-                            break;
-                        case 2:
-                            txtDos.setText("9");
-                            break;
-                        case 3:
-                            txtTres.setText("9");
-                            break;
-                        case 4:
-                            txtCuatro.setText("9");
-                            break;
-                    }
-                }
-                break;
-            case R.id.btnLimpiar:
-                limpiarCampos();
                 break;
         }
     }
