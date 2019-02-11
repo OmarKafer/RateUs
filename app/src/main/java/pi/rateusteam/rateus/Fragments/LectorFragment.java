@@ -66,7 +66,7 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //comentario de Jorge -------------------
+        // Comentario de Jorge -------------------
         // Inflate the layout for this fragment
 
         // Comentario de Omar
