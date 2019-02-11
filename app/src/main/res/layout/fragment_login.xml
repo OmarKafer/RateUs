@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="@string/txtCrearProyecto2"
+                android:text="@string/txtCrearProyecto"
                 android:textColor="#FFFFFF"
                 android:textSize="15dp" />
 
