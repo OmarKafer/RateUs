@@ -40,8 +40,6 @@ import pi.rateusteam.rateus.R;
  */
 public class LectorFragment extends Fragment implements View.OnClickListener {
 
-    private String mParam1;
-    private String mParam2;
     private final int MY_PERMISSIONS_REQUEST_CAMERA = 123;
     private String token = "";
     private String tokenanterior = "";

@@ -125,7 +125,8 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
                 || txtContrasenya.getText().toString().compareToIgnoreCase("") == 0
                 || txtConfirmarContrasenya.getText().toString().compareToIgnoreCase("") == 0
                 || txtTitulo.getText().toString().compareToIgnoreCase("") == 0
-                || txtDescripcion.getText().toString().compareToIgnoreCase("") == 0) {
+                || txtDescripcion.getText().toString().compareToIgnoreCase("") == 0
+                || uri == null) {
             return false;
         } else {
             return true;

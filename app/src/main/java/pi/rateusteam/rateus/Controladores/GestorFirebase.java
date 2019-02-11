@@ -13,6 +13,7 @@ import com.google.firebase.auth.FirebaseAuth;
 
 import pi.rateusteam.rateus.Fragments.LectorFragment;
 import pi.rateusteam.rateus.Fragments.LoginFragment;
+import pi.rateusteam.rateus.Fragments.VotacionFragment;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.Modelo.Proyecto;
 
@@ -40,7 +41,7 @@ public class GestorFirebase {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            ((NavigationHost) activity).navigateTo(new LectorFragment(), false);
+                            ((NavigationHost) activity).navigateTo(new VotacionFragment(), false);
                         } else {
                             gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
                         }
@@ -48,12 +49,13 @@ public class GestorFirebase {
                 });
     }
 
-    public void registrarUsuario(String email, String contrasenya, final Proyecto p, final Uri uri) {
+    public void registrarUsuario(final String email, final String contrasenya, final Proyecto p, final Uri uri) {
         mAuth.createUserWithEmailAndPassword(email, contrasenya)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            Log.d("Manel","usuari:"+mAuth.getCurrentUser());
                             guardarDatosProyecto(p, uri);
                             gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");
                             mAuth.signOut();
