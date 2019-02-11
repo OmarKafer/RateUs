@@ -199,7 +199,6 @@ public class LectorFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        int campoRellenar;
         switch (v.getId()) {
             case R.id.camera_view:
                     cameraFocus(cameraSource, Camera.Parameters.FOCUS_MODE_CONTINUOUS_VIDEO);
