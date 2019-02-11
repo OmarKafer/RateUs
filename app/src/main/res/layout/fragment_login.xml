@@ -10,187 +10,127 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical"
-        android:padding="20dp">
+        android:padding="20dp"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="3"
+            android:src="@drawable/logoapp"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/txtEmail"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:drawableLeft="@android:drawable/ic_dialog_email"
+            android:drawablePadding="10dp"
+            android:background="#28ffffff"
+            android:hint="@string/txtEmail"
+            android:inputType="textEmailAddress"
+            android:paddingLeft="8dp"
+            android:textSize="20dp"
+            android:textColor="#FFFFFF"
+            android:textColorHint="#FFFFFF"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <EditText
+            android:id="@+id/txtContrasenya"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="2"
+            android:layout_gravity="center"
+            android:drawablePadding="7dp"
+            android:drawableLeft="@android:drawable/ic_lock_idle_lock"
+            android:background="#28ffffff"
+            android:textSize="20dp"
+            android:hint="@string/txtContrasenya"
+            android:inputType="textPassword"
+            android:text=""
+            android:paddingLeft="8dp"
+            android:textColorHint="#FFFFFF"
+            android:textColor="#FFFFFF"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnEntrar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/btnEntrar"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:background="@drawable/btn_entrar"/>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="0.25"
-            android:orientation="vertical"
-            android:gravity="center_horizontal">
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
 
-            <ImageView
-                android:layout_width="wrap_content"
+            <ImageButton
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:src="@drawable/logoapp"/>
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"/>
 
-            <LinearLayout
-                android:layout_width="match_parent"
+            <TextView
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:layout_weight="2"
+                android:gravity="center"
+                android:text="@string/txtCrearProyecto2"
+                android:textColor="#FFFFFF"
+                android:textSize="15dp" />
 
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="#000000"
-                    android:visibility="invisible"/>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-
-
-                    <ImageView
-                        android:layout_height="50dp"
-                        android:layout_width="50dp"
-                        android:src="@android:drawable/ic_dialog_email"
-                        android:layout_marginRight="10dp"/>
-
-                    <EditText
-                        android:id="@+id/txtEmail"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:layout_gravity="center"
-                        android:background="#28ffffff"
-                        android:hint="@string/txtEmail"
-                        android:inputType="textEmailAddress"
-                        android:paddingLeft="8dp"
-                        android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="vertical">
-
-                    <EditText
-                        android:layout_width="match_parent"
-                        android:layout_height="20dp"
-                        android:background="#000000"
-                        android:visibility="invisible"/>
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:focusable="true"
-                    android:focusableInTouchMode="true">
-
-                    <ImageView
-                        android:layout_height="55dp"
-                        android:layout_width="55dp"
-                        android:src="@android:drawable/ic_lock_idle_lock"
-                        android:layout_marginRight="4dp"/>
-
-                    <EditText
-                        android:id="@+id/txtContrasenya"
-                        android:layout_gravity="center"
-                        android:layout_width="match_parent"
-                        android:layout_height="50dp"
-                        android:background="#28ffffff"
-                        android:hint="@string/txtContrasenya"
-                        android:inputType="textPassword"
-                        android:text=""
-                        android:paddingLeft="8dp"
-                        android:textColorHint="#FFFFFF"
-                        android:textColor="#FFFFFF"/>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-
-            <LinearLayout
-                android:layout_width="match_parent"
+            <ImageButton
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="#000000"
-                    android:visibility="invisible"/>
-
-                <Button
-                    android:id="@+id/btnEntrar"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/btnEntrar"
-                    android:textColor="#ffffff"
-                    android:textSize="18dp"
-                    android:background="@drawable/btn_entrar"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#000000"
-                    android:visibility="invisible"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:backgroundTint="#FFFFFF"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/txtCrearProyecto"
-                    android:textSize="15dp"
-                    android:textColor="#FFFFFF"/>
-
-                <ImageButton
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:layout_marginTop="1dp"
-                    android:backgroundTint="#FFFFFF"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <EditText
-                    android:layout_width="match_parent"
-                    android:layout_height="40dp"
-                    android:background="#000000"
-                    android:visibility="invisible"/>
-
-                <Button
-                    android:id="@+id/btnAnyadir"
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:text="@string/btnRegistro"
-                    android:textColor="#ffffff"
-                    android:textSize="18dp"
-                    android:background="@drawable/btn_entrar"/>
-
-            </LinearLayout>
+                android:layout_weight="1"
+                android:backgroundTint="#FFFFFF"/>
 
         </LinearLayout>
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:background="#000000"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/btnAnyadir"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="@string/btnRegistro"
+            android:textColor="#ffffff"
+            android:textSize="18dp"
+            android:background="@drawable/btn_entrar"/>
 
     </LinearLayout>
 
