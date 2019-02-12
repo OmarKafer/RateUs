@@ -88,7 +88,7 @@ public class GestorFirebase {
     }
 
     public void anyadirVoto(Voto v) {
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child("votos").child(getIdUsuario());
         database.child(v.getIdVotante()).setValue(v);
     }
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -39,6 +40,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
     private ImageView imgLogo;
     private String votante;
     private RatingBar rbCreatividad, rbViabilidad, rbComunicacion;
+    private Button btnVotar;
 
     public VotacionFragment() {
         // Required empty public constructor
@@ -62,14 +64,14 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
 
+        btnVotar = v.findViewById(R.id.btnVotar);
+        btnVotar.setOnClickListener(this);
+
         lEscanear = v.findViewById(R.id.lEscanear);
         lEscanear.setOnClickListener(this);
 
         lVotos = v.findViewById(R.id.lVotos);
-        lVotos.setOnClickListener(this);
-
-        lBoton =v.findViewById(R.id.lBoton);
-        lBoton.setOnClickListener(this);
+        lBoton = v.findViewById(R.id.lBoton);
 
         gestorFirebase = new GestorFirebase(getActivity());
         gestorErrores = new GestorErrores(getContext());
@@ -114,7 +116,8 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case R.id.lEscanear:
                 iniciarLector();
                 break;
-            case R.id.lBoton:
+            case R.id.btnVotar:
+                Log.d("Omar", "Has pulsado :)");
                 votar();
                 break;
         }

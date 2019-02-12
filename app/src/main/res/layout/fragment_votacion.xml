@@ -17,7 +17,7 @@
             android:id="@+id/lProyecto"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="0.7"
             android:orientation="vertical">
 
             <LinearLayout
@@ -27,28 +27,42 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/txtTitulo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center"
-                    android:text="RATE US" />
+                    android:textSize="30dp"/>
 
                 <ImageView
+                    android:id="@+id/imgLogo"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:src="@drawable/logoapp" />
+                    android:src="@drawable/logoapp"/>
 
             </LinearLayout>
-
-            <TextView
+            <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_weight="2"
-                android:inputType="textMultiLine|text"
-                android:justificationMode="inter_word"
-                android:maxLines="10"
-                android:text="ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO, ESTA ES LA DESCRIPCIÓN DEL PROYECTO" />
+                android:layout_weight="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtDescripcion"
+                        android:padding="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textMultiLine|text"
+                        android:justificationMode="inter_word"
+                        android:maxLines="10" />
+
+                </LinearLayout>
+            </ScrollView>
+
         </LinearLayout>
 
         <LinearLayout
@@ -147,13 +161,14 @@
             android:orientation="vertical">
 
             <Button
+                android:id="@+id/btnVotar"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
-                android:background="@drawable/btn_entrar"
                 android:text="@string/btnVotar"
                 android:textColor="#ffffff"
-                android:textSize="18dp" />
+                android:textSize="18dp"
+                android:background="@drawable/btn_entrar" />
 
         </LinearLayout>
 

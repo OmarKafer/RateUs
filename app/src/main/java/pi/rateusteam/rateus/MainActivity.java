@@ -21,6 +21,8 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTheme(R.style.AppTheme);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         FragmentTransaction transaction =
                 getSupportFragmentManager()
                         .beginTransaction()
+                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
                         .replace(R.id.container, fragment);
 
         if (addToBackstack) {
