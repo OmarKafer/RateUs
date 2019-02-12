@@ -67,7 +67,7 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
         //Creama la camara
         cameraSource = new CameraSource
                 .Builder(getApplicationContext(), barcodeDetector)
-                .setRequestedPreviewSize(620, 5000)
+                .setRequestedPreviewSize(1280, 720)
                 .build();
 
         // Prepara el lector de qr

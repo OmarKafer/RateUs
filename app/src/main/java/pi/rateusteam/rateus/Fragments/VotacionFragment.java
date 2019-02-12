@@ -119,6 +119,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case R.id.btnVotar:
                 Log.d("Omar", "Has pulsado :)");
                 votar();
+                ventanaSinVotos();
                 break;
         }
     }

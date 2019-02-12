@@ -1,5 +1,5 @@
 <resources>
-    <style name="SplashTheme" parent="AppTheme">
+    <style name="SplashTheme" parent="Base.Theme.AppCompat">
         <item name="android:windowBackground">@drawable/iconoapp</item>
     </style>
 </resources>

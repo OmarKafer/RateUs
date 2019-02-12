@@ -88,8 +88,9 @@ public class GestorFirebase {
     }
 
     public void anyadirVoto(Voto v) {
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child("votos").child(getIdUsuario());
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario()).child("votos");
         database.child(v.getIdVotante()).setValue(v);
+        gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");
     }
 
     public void recuperarProyecto(final TextView txtTitulo, final TextView txtDescripcion, final ImageView imgLogo) {
