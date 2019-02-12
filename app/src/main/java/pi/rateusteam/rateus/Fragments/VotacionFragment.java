@@ -102,7 +102,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case ACTIVITY_LECTOR:
                 if(resultCode == RESULT_OK) {
                     votante = data.getStringExtra("token");
-                    ventanaConVotos();
+                    comprobarVotante();
                 } else if(resultCode == RESULT_CANCELED) {
                     ventanaSinVotos();
                 }
@@ -117,7 +117,6 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
                 iniciarLector();
                 break;
             case R.id.btnVotar:
-                Log.d("Omar", "Has pulsado :)");
                 votar();
                 ventanaSinVotos();
                 break;
@@ -129,15 +128,18 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         startActivityForResult(i, ACTIVITY_LECTOR);
     }
 
-    private void ventanaSinVotos() {
+    public void ventanaSinVotos() {
         permitirAtras = true;
         lEscanear.setVisibility(View.VISIBLE);
         lVotos.setVisibility(View.GONE);
         lBoton.setVisibility(View.GONE);
     }
 
-    private void ventanaConVotos() {
+    public void ventanaConVotos() {
         permitirAtras = false;
+        rbComunicacion.setRating((float)1);
+        rbViabilidad.setRating((float)1);
+        rbCreatividad.setRating((float)1);
         lEscanear.setVisibility(View.GONE);
         lVotos.setVisibility(View.VISIBLE);
         lBoton.setVisibility(View.VISIBLE);
@@ -150,6 +152,10 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private void cargarDatosProyecto() {
         gestorFirebase.recuperarProyecto(txtTitulo, txtDescripcion, imgLogo);
+    }
+
+    private void comprobarVotante() {
+        gestorFirebase.comprobarVotante(votante, this);
     }
 
 }

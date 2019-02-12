@@ -3,12 +3,15 @@ package pi.rateusteam.rateus.Controladores;
 import android.app.Activity;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -65,7 +68,7 @@ public class GestorFirebase {
                         if (task.isSuccessful()) {
                             p.setIdUsuario(getIdUsuario());
                             guardarDatosProyecto(p, uri);
-                            gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");
+                            gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");   // PONER EN STRINGS
                             mAuth.signOut();
                             ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
                         } else {
@@ -82,7 +85,7 @@ public class GestorFirebase {
         mStorage.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                Log.d("Omar", "Se ha guardado la imagen");
+                // Se guarda la imagen de usuario.
             }
         });
     }
@@ -90,7 +93,7 @@ public class GestorFirebase {
     public void anyadirVoto(Voto v) {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario()).child("votos");
         database.child(v.getIdVotante()).setValue(v);
-        gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");
+        gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");  // PONER EN STRINGS
     }
 
     public void recuperarProyecto(final TextView txtTitulo, final TextView txtDescripcion, final ImageView imgLogo) {
@@ -115,10 +118,47 @@ public class GestorFirebase {
     }
 
     private void recuperarLogoProyecto(final ImageView imgLogo) {
-        //
+        StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("logos").child(getIdUsuario());
+        mStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+            @Override
+            public void onSuccess(Uri uri) {
+                Glide.with(activity.getApplicationContext())
+                        .load(uri)
+                        .into(imgLogo);
+            }
+        });
+        mStorage.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
+            @Override
+            public void onFailure(@NonNull Exception e) {
+                gestorErrores.mostrarError("Ha habido un error al cargar el logo"); // METER A STRINGS
+            }
+        });
     }
 
     public String getIdUsuario() {
         return mAuth.getCurrentUser().getUid();
+    }
+
+    public void comprobarVotante(String votante, final VotacionFragment f) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario()).child("votos");
+        Query q = database.orderByChild("idVotante").equalTo(votante);
+        q.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.hasChildren()) {
+                    // El voto de este usuario ya se ha registrado.
+                    f.ventanaSinVotos();
+                    gestorErrores.mostrarError("Este QR ya ha votado el proyecto.");  // METER A STRINGS
+                } else {
+                    // El voto de este usuario no se ha registrado.
+                    f.ventanaConVotos();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 }

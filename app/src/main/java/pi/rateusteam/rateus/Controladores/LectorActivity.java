@@ -117,8 +117,6 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
                         // guardamos el ultimo token procesado
                         tokenanterior = token;
                         volverConCodigo(token);
-                        Log.i("Omar", token);
-
 
                         new Thread(new Runnable() {
                             public void run() {
