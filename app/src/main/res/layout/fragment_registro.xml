@@ -92,8 +92,7 @@
                         android:paddingRight="10dp"
                         android:text=""
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
-
+                        android:textColorHint="#96383838"/>
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="0dp"
@@ -114,7 +113,7 @@
                         android:paddingRight="10dp"
                         android:text=""
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:textColorHint="#96383838" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -136,7 +135,7 @@
                         android:paddingRight="10dp"
                         android:text=""
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:textColorHint="#96383838"/>
 
                     <EditText
                         android:layout_width="match_parent"
@@ -159,7 +158,7 @@
                         android:paddingRight="10dp"
                         android:text=""
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:textColorHint="#96383838" />
 
                     <EditText
                         android:layout_width="match_parent"
@@ -184,7 +183,7 @@
                         android:paddingRight="10dp"
                         android:text=""
                         android:textColor="#FFFFFF"
-                        android:textColorHint="#FFFFFF" />
+                        android:textColorHint="#96383838" />
 
                     <EditText
                         android:layout_width="match_parent"
