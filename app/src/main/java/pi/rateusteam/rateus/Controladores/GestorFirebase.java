@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -16,9 +19,14 @@ import pi.rateusteam.rateus.Fragments.LoginFragment;
 import pi.rateusteam.rateus.Fragments.VotacionFragment;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.Modelo.Proyecto;
+import pi.rateusteam.rateus.Modelo.Voto;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -55,7 +63,7 @@ public class GestorFirebase {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
-                            Log.d("Manel","usuari:"+mAuth.getCurrentUser());
+                            p.setIdUsuario(getIdUsuario());
                             guardarDatosProyecto(p, uri);
                             gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");
                             mAuth.signOut();
@@ -77,6 +85,36 @@ public class GestorFirebase {
                 Log.d("Omar", "Se ha guardado la imagen");
             }
         });
+    }
+
+    public void anyadirVoto(Voto v) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
+        database.child(v.getIdVotante()).setValue(v);
+    }
+
+    public void recuperarProyecto(final TextView txtTitulo, final TextView txtDescripcion, final ImageView imgLogo) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        Query q = database.orderByChild("idUsuario").equalTo(getIdUsuario());
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    Proyecto p = i.getValue(Proyecto.class);
+                    txtTitulo.setText(p.getTitulo());
+                    txtDescripcion.setText(p.getDescripcion());
+                    recuperarLogoProyecto(imgLogo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private void recuperarLogoProyecto(final ImageView imgLogo) {
+        //
     }
 
     public String getIdUsuario() {

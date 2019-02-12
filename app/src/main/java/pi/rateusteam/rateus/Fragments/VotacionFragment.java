@@ -9,12 +9,19 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.view.KeyEvent;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.google.android.gms.vision.text.Line;
 
+import pi.rateusteam.rateus.Controladores.GestorErrores;
+import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Controladores.LectorActivity;
+import pi.rateusteam.rateus.Modelo.Voto;
 import pi.rateusteam.rateus.R;
 
 import static android.app.Activity.RESULT_CANCELED;
@@ -24,9 +31,14 @@ import static pi.rateusteam.rateus.MainActivity.permitirAtras;
 public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private static final int ACTIVITY_LECTOR = 2;
-    private LinearLayout lEscanear;
-    private LinearLayout lVotos;
-    private LinearLayout lBoton;
+    private LinearLayout lEscanear, lVotos, lBoton;
+    private GestorFirebase gestorFirebase;
+    private GestorErrores gestorErrores;
+
+    private TextView txtTitulo, txtDescripcion;
+    private ImageView imgLogo;
+    private String votante;
+    private RatingBar rbCreatividad, rbViabilidad, rbComunicacion;
 
     public VotacionFragment() {
         // Required empty public constructor
@@ -46,6 +58,10 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_votacion, container, false);
+        txtTitulo = v.findViewById(R.id.txtTitulo);
+        txtDescripcion = v.findViewById(R.id.txtDescripcion);
+        imgLogo = v.findViewById(R.id.imgLogo);
+
         lEscanear = v.findViewById(R.id.lEscanear);
         lEscanear.setOnClickListener(this);
 
@@ -55,7 +71,15 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         lBoton =v.findViewById(R.id.lBoton);
         lBoton.setOnClickListener(this);
 
+        gestorFirebase = new GestorFirebase(getActivity());
+        gestorErrores = new GestorErrores(getContext());
+
+        rbCreatividad = v.findViewById(R.id.rbCreatividad);
+        rbViabilidad = v.findViewById(R.id.rbViabilidad);
+        rbComunicacion = v.findViewById(R.id.rbComunicacion);
+
         ventanaSinVotos();
+        cargarDatosProyecto();
 
         return v;
     }
@@ -75,11 +99,9 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         switch(requestCode) {
             case ACTIVITY_LECTOR:
                 if(resultCode == RESULT_OK) {
-                    String token = data.getStringExtra("token");
-                    Log.d("Omar", "El token es: " + token);
+                    votante = data.getStringExtra("token");
                     ventanaConVotos();
                 } else if(resultCode == RESULT_CANCELED) {
-                    Log.d("Omar", "Se ha cancelado el activity");
                     ventanaSinVotos();
                 }
                 break;
@@ -92,6 +114,9 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case R.id.lEscanear:
                 iniciarLector();
                 break;
+            case R.id.lBoton:
+                votar();
+                break;
         }
     }
 
@@ -100,18 +125,27 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         startActivityForResult(i, ACTIVITY_LECTOR);
     }
 
-    public void ventanaSinVotos() {
+    private void ventanaSinVotos() {
         permitirAtras = true;
         lEscanear.setVisibility(View.VISIBLE);
         lVotos.setVisibility(View.GONE);
         lBoton.setVisibility(View.GONE);
     }
 
-    public void ventanaConVotos() {
+    private void ventanaConVotos() {
         permitirAtras = false;
         lEscanear.setVisibility(View.GONE);
         lVotos.setVisibility(View.VISIBLE);
         lBoton.setVisibility(View.VISIBLE);
+    }
+
+    private void votar() {
+        Voto v = new Voto(rbCreatividad.getRating(), rbViabilidad.getRating(), rbComunicacion.getRating(), votante);
+        gestorFirebase.anyadirVoto(v);
+    }
+
+    private void cargarDatosProyecto() {
+        gestorFirebase.recuperarProyecto(txtTitulo, txtDescripcion, imgLogo);
     }
 
 }

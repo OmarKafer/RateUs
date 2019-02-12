@@ -6,8 +6,11 @@ public class Proyecto {
 
     private String titulo;
     private String descripcion;
+    private String idUsuario;
 
-    public Proyecto(String titulo, String descripcion) {
+    public Proyecto(){}
+
+    public Proyecto(String titulo, String descripcion, String idUsuario) {
         this.titulo = titulo;
         this.descripcion = descripcion;
     }
@@ -28,4 +31,11 @@ public class Proyecto {
         this.descripcion = descripcion;
     }
 
+    public String getIdUsuario() {
+        return idUsuario;
+    }
+
+    public void setIdUsuario(String idUsuario) {
+        this.idUsuario = idUsuario;
+    }
 }
