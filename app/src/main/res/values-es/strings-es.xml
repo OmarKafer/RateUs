@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">RateUs</string>
+    <string name="txtEmail">Email</string>
+    <string name="txtContrasenya">Contraseña</string>
+    <string name="txtTitulo">Título</string>
+    <string name="txtDescripcion">Descripción</string>
+    <string name="btnGuardar">Guardar</string>
+    <string name="btnCancelar">Cancelar</string>
+    <string name="btnEntrar">Entrar</string>
+    <string name="txtConfirmarContrasenya">Confirmar contraseña</string>
+    <string name="txtCrearProyecto">O CREAR PROYECTO</string>
+    <string name="btnRegistro">REGISTRAR</string>
+    <string name="txtCrearProyecto2">CREAR PROYECTO</string>
+    <string name="txtCreatividad">Creatividad e innovación del proyecto</string>
+    <string name="txtImplementacion">Posibilidades de implementación y transferibilidad</string>
+    <string name="txtComunicacion">Comunicación</string>
+    <string name="txtEscaneaTu">¡Escanea tu</string>
+    <string name="txtCodigoQR">código QR!</string>
+    <string name="btnVotar">VOTAR</string>
+</resources>
