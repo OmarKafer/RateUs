@@ -41,7 +41,7 @@
             android:paddingLeft="8dp"
             android:textSize="20dp"
             android:textColor="#FFFFFF"
-            android:textColorHint="#4e383838" />
+            android:textColorHint="#96383838" />
 
         <EditText
             android:layout_width="match_parent"
@@ -64,7 +64,7 @@
             android:inputType="textPassword"
             android:text=""
             android:paddingLeft="8dp"
-            android:textColorHint="#4e383838"
+            android:textColorHint="#96383838"
             android:textColor="#FFFFFF"/>
 
         <EditText
