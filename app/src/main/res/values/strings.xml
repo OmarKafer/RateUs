@@ -21,13 +21,11 @@
 
     <string-array name="ciclos">
         <item>@string/spinnerCiclo</item>
-        <item>Educación Infantil</item>
-        <item>Informática</item>
-        <item>Empresa</item>
+        <item>EDI</item>
+        <item>DAM</item>
+        <item>DAW</item>
+        <item>ADE</item>
     </string-array>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
 </resources>
