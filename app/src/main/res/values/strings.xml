@@ -17,8 +17,10 @@
     <string name="txtEscaneaTu">¡Escanea tu</string>
     <string name="txtCodigoQR">código QR!</string>
     <string name="btnVotar">VOTAR</string>
+    <string name="spinnerCiclo">Seleccione un ciclo</string>
 
-    <string-array name="categorias">
+    <string-array name="ciclos">
+        <item>@string/spinnerCiclo</item>
         <item>Educación Infantil</item>
         <item>Informática</item>
         <item>Empresa</item>

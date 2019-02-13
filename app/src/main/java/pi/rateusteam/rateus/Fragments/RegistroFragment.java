@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 
 import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Controladores.GestorFirebase;
@@ -33,6 +34,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
     private EditText txtEmail, txtContrasenya, txtConfirmarContrasenya, txtTitulo, txtDescripcion;
     private Button btnGuardar, btnCancelar;
     private ImageView btnImagen;
+    private Spinner spinnerCiclo;
     private Uri uri = null;
 
     private GestorErrores gestorErrores;
@@ -66,6 +68,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
         txtConfirmarContrasenya = v.findViewById(R.id.txtConfirmarContrasenya);
         txtTitulo = v.findViewById(R.id.txtTitulo);
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
+        spinnerCiclo = v.findViewById(R.id.spinnerCiclo);
         btnGuardar = v.findViewById(R.id.btnGuardar);
         btnCancelar = v.findViewById(R.id.btnCancelar);
         btnImagen = v.findViewById(R.id.btnImagen);
@@ -95,7 +98,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
             case R.id.btnGuardar:
                 if(comprobarCampos()) {
                     if(comprobarContrasenyas()) {
-                        Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString(), null);
+                        Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString(), null, spinnerCiclo.getSelectedItem().toString());
                         gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p, uri);
                     } else {
                         // Contraseñas no coinciden
@@ -126,7 +129,8 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
                 || txtConfirmarContrasenya.getText().toString().compareToIgnoreCase("") == 0
                 || txtTitulo.getText().toString().compareToIgnoreCase("") == 0
                 || txtDescripcion.getText().toString().compareToIgnoreCase("") == 0
-                || uri == null) {
+                || uri == null
+                || spinnerCiclo.getSelectedItem().toString().compareToIgnoreCase(getResources().getString(R.string.spinnerCiclo)) == 0) {
             return false;
         } else {
             return true;
