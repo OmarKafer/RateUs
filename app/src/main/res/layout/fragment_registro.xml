@@ -153,8 +153,7 @@
                         android:spinnerMode="dropdown"
                         android:drawSelectorOnTop="true"
                         android:entries="@array/categorias"
-                        android:backgroundTint="#28ffffff"
-                        />
+                        android:backgroundTint="#28ffffff"/>
 
                     <EditText
                         android:layout_width="match_parent"
