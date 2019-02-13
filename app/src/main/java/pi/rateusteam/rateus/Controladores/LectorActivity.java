@@ -15,6 +15,8 @@ import android.view.SurfaceView;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.google.android.gms.vision.CameraSource;
 import com.google.android.gms.vision.Detector;
@@ -36,6 +38,8 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
     private SurfaceView cameraView;
     private TextView txtCodigo;
 
+    final String regex = "([0-9]{22})|([a-zA-Z]+ [a-zA-Z ]+)";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,7 +57,6 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
         txtCodigo = (TextView) findViewById(R.id.txtCodigo);
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
         cameraView.setOnClickListener(this);
-
         initQR();
     }
 
@@ -116,7 +119,7 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
 
                         // guardamos el ultimo token procesado
                         tokenanterior = token;
-                        volverConCodigo(token);
+                        comprobarCodigo(token);
 
                         new Thread(new Runnable() {
                             public void run() {
@@ -146,6 +149,18 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
         i.putExtra("token", token);
         setResult(RESULT_OK, i);
         finish();
+    }
+
+    private void comprobarCodigo(String token) {
+        final Pattern pattern = Pattern.compile(regex, Pattern.MULTILINE);
+        final Matcher matcher = pattern.matcher(token);
+        int cont = 0;
+        while(matcher.find()) {
+            cont++;
+        }
+        if (cont == 1) {
+            volverConCodigo(token);
+        }
     }
 
     @Override

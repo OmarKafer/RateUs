@@ -7,6 +7,7 @@ public class Proyecto {
     private String titulo;
     private String descripcion;
     private String idUsuario;
+    private String ciclo;
 
     public Proyecto(){}
 
