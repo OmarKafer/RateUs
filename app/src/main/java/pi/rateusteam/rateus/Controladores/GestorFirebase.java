@@ -1,6 +1,8 @@
 package pi.rateusteam.rateus.Controladores;
 
 import android.app.Activity;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
@@ -36,22 +38,37 @@ import com.google.firebase.storage.UploadTask;
 
 public class GestorFirebase {
 
+
+
     private FirebaseAuth mAuth;
     private Activity activity;
     private GestorErrores gestorErrores;
+
+    private GestorPreferencias gestorPreferencias;
 
     public GestorFirebase(Activity activity) {
         mAuth = FirebaseAuth.getInstance();
         this.activity = activity;
         gestorErrores = new GestorErrores(activity.getApplicationContext());
+        gestorPreferencias = new GestorPreferencias(activity);
+
+
     }
 
-    public void login(String email, String contrasenya) {
+    public void login(final String email, String contrasenya) {
         mAuth.signInWithEmailAndPassword(email, contrasenya)
                 .addOnCompleteListener(activity, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
+                            if(email.compareToIgnoreCase("info@rateus.es") == 0 ){
+                                gestorPreferencias.introducirPreferencia("admin",true);
+                                Log.d("Jorge","Prefrencia: "+gestorPreferencias.recuperarPreferencia("admin"));
+                            }else {
+                                gestorPreferencias.introducirPreferencia("admin",false);
+                                Log.d("Jorge","Prefrencia: "+gestorPreferencias.recuperarPreferencia("admin"));
+
+                            }
                             ((NavigationHost) activity).navigateTo(new VotacionFragment(), false);
                         } else {
                             gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
