@@ -21,6 +21,7 @@ import com.google.android.gms.vision.text.Line;
 
 import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Controladores.GestorFirebase;
+import pi.rateusteam.rateus.Controladores.GraficasActivity;
 import pi.rateusteam.rateus.Controladores.LectorActivity;
 import pi.rateusteam.rateus.Modelo.Voto;
 import pi.rateusteam.rateus.R;
@@ -32,6 +33,7 @@ import static pi.rateusteam.rateus.MainActivity.permitirAtras;
 public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private static final int ACTIVITY_LECTOR = 2;
+    private static final int ACTIVITY_GRAFICAS = 3;
     private LinearLayout lEscanear, lVotos, lBoton;
     private GestorFirebase gestorFirebase;
     private GestorErrores gestorErrores;
@@ -63,6 +65,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         txtTitulo = v.findViewById(R.id.txtTitulo);
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
+        imgLogo.setOnClickListener(this);
 
         btnVotar = v.findViewById(R.id.btnVotar);
         btnVotar.setOnClickListener(this);
@@ -107,6 +110,11 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
                     ventanaSinVotos();
                 }
                 break;
+            case ACTIVITY_GRAFICAS:
+                if(resultCode == RESULT_CANCELED) {
+                    Log.d("Omar", "He vuelto al fragment de votar desde las gráfinas");
+                    ventanaSinVotos();
+                }
         }
     }
 
@@ -119,6 +127,10 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case R.id.btnVotar:
                 votar();
                 ventanaSinVotos();
+                break;
+            case R.id.imgLogo:
+                Intent i = new Intent(getContext(), GraficasActivity.class);
+                startActivityForResult(i, ACTIVITY_GRAFICAS);
                 break;
         }
     }

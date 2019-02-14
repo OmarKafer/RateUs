@@ -8,6 +8,7 @@ public class Proyecto {
     private String descripcion;
     private String idUsuario;
     private String ciclo;
+    private int axisXProyecto;
 
     public Proyecto(){}
 
@@ -15,6 +16,7 @@ public class Proyecto {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.ciclo = ciclo;
+        axisXProyecto = 0;
     }
 
     public String getTitulo() {
@@ -47,5 +49,13 @@ public class Proyecto {
 
     public void setCiclo(String ciclo) {
         this.ciclo = ciclo;
+    }
+
+    public int getAxisXProyecto() {
+        return axisXProyecto;
+    }
+
+    public void setAxisXProyecto(int axisXProyecto) {
+        this.axisXProyecto = axisXProyecto;
     }
 }

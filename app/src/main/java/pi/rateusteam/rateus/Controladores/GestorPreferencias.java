@@ -9,9 +9,6 @@ public class GestorPreferencias {
     private SharedPreferences sharedPreferences;
     SharedPreferences.Editor editor;
 
-
-
-
     public GestorPreferencias(Activity activity){
         sharedPreferences = activity.getSharedPreferences(PREFS,Activity.MODE_PRIVATE);
         editor = sharedPreferences.edit();
@@ -19,6 +16,7 @@ public class GestorPreferencias {
 
     public void introducirPreferencia(String clave , boolean valor){
         editor.putBoolean(clave,valor);
+        editor.commit();
     }
 
     public boolean recuperarPreferencia(String clave){

@@ -7,6 +7,8 @@ public class Voto {
     private float votoComunicacion;
     private String idVotante;
 
+    public Voto(){};
+
     public Voto(float votoCreatividad, float votoViabilidad, float votoComunicacion, String idVotante) {
         this.votoCreatividad = votoCreatividad;
         this.votoViabilidad = votoViabilidad;

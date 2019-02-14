@@ -12,7 +12,7 @@ public class GestorErrores {
     }
 
     public void mostrarError(String error) {
-        Toast.makeText(context, error, Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, error, Toast.LENGTH_LONG).show();
     }
 
     public void mostrarMensaje(String mensaje) {

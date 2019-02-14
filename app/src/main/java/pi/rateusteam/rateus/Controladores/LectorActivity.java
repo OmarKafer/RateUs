@@ -37,6 +37,7 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
     private CameraSource cameraSource;
     private SurfaceView cameraView;
     private TextView txtCodigo;
+    private GestorErrores gestorErrores;
 
     final String regex = "([0-9]{22})|([a-zA-Z]+ [a-zA-Z ]+)";
 
@@ -53,6 +54,8 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
                 requestPermissions(new String[]{android.Manifest.permission.CAMERA}, MY_PERMISSIONS_REQUEST_CAMERA);
             }
         }
+
+        gestorErrores = new GestorErrores(this);
 
         txtCodigo = (TextView) findViewById(R.id.txtCodigo);
         cameraView = (SurfaceView) findViewById(R.id.camera_view);
@@ -160,6 +163,8 @@ public class LectorActivity extends AppCompatActivity implements View.OnClickLis
         }
         if (cont == 1) {
             volverConCodigo(token);
+        } else {
+            gestorErrores.mostrarError("QR no válido"); // METER EN STRINGS
         }
     }
 

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 import android.net.Uri;
 import android.support.annotation.NonNull;
+import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.widget.EditText;
@@ -12,6 +13,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -36,6 +42,10 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 public class GestorFirebase {
 
 
@@ -43,6 +53,7 @@ public class GestorFirebase {
     private FirebaseAuth mAuth;
     private Activity activity;
     private GestorErrores gestorErrores;
+    private int axisX = 0;
 
     private GestorPreferencias gestorPreferencias;
 
@@ -177,5 +188,141 @@ public class GestorFirebase {
 
             }
         });
+    }
+
+    public void crearGraficas(final BarChart grafica) {
+        final ArrayList<BarEntry> entries = new ArrayList<>();
+        final ArrayList<Voto> votos = new ArrayList<>();
+        final BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        final BarData data = new BarData(dataset);
+        data.setBarWidth((float)0.9);
+        grafica.setData(data);
+        grafica.setFitBars(true);
+        grafica.getAxisRight().setDrawGridLines(false);
+        grafica.getAxisLeft().setDrawGridLines(false);
+        grafica.getXAxis().setDrawGridLines(false);
+
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    votos.clear();
+                    final String idProyecto = i.child("idUsuario").getValue(String.class);
+                    DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(idProyecto).child("votos");
+                    databaseAux.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for(DataSnapshot i: dataSnapshot.getChildren()) {
+                                votos.add(i.getValue(Voto.class));
+                            }
+                            float media = calcularMedia(votos);
+                            Log.d("Omar", "AxisX: " + axisX + " Media: " + media);
+                            database.child(idProyecto).child("axisXProyecto").setValue(axisX);
+                            BarEntry entrada = new BarEntry(axisX, media);
+                            dataset.addEntry(entrada);
+                            data.notifyDataChanged(); // let the data know a dataSet changed
+                            grafica.notifyDataSetChanged(); // let the chart know it's data changed
+                            grafica.invalidate();
+                            axisX++;
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void actualizarGraficas(final BarChart grafica) {
+        final ArrayList<BarEntry> entries = new ArrayList<>();
+        final ArrayList<Voto> votos = new ArrayList<>();
+        final BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
+        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+        final BarData data = new BarData(dataset);
+        data.setBarWidth((float)0.9);
+        grafica.setData(data);
+        grafica.setFitBars(true);
+        grafica.getAxisRight().setDrawGridLines(false);
+        grafica.getAxisLeft().setDrawGridLines(false);
+        grafica.getXAxis().setDrawGridLines(false);
+        axisX = 0;
+
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                data.removeDataSet(dataset);
+                grafica.notifyDataSetChanged();
+                grafica.invalidate();
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    votos.clear();
+                    String idProyecto = i.child("idUsuario").getValue(String.class);
+                    final int axisXProyecto = i.child("axisX").getValue(Integer.class);
+                    DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(idProyecto).child("votos");
+                    databaseAux.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            for(DataSnapshot i: dataSnapshot.getChildren()) {
+                                votos.add(i.getValue(Voto.class));
+                            }
+                            float media = calcularMedia(votos);
+                            Log.d("Omar", "AxisX: " + axisX + " Media: " + media);
+                            BarEntry entrada = new BarEntry(axisX, media);
+                            dataset.addEntry(entrada);
+                            float[] test ={axisX, media};
+                            entries.get(axisXProyecto).setVals(test);
+                            data.addDataSet(dataset);
+                            data.notifyDataChanged(); // let the data know a dataSet changed
+                            grafica.notifyDataSetChanged(); // let the chart know it's data changed
+                            grafica.invalidate();
+                            axisX++;
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                }
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    private float calcularMedia(ArrayList<Voto> votos) {
+        ArrayList<Float> medias = new ArrayList<>();
+        medias.clear();
+        Iterator it = votos.iterator();
+        while(it.hasNext()) {
+            Voto v = (Voto) it.next();
+            medias.add((float)(v.getVotoComunicacion() + v.getVotoCreatividad() + v.getVotoViabilidad())/3);
+            Log.d("Operacion", "Nueva Media: " + (float)(v.getVotoComunicacion() + v.getVotoCreatividad() + v.getVotoViabilidad())/3);
+        }
+        float mediaTotal = 0;
+
+        it = medias.iterator();
+        while(it.hasNext()) {
+            mediaTotal += (float)it.next();
+        }
+        mediaTotal = mediaTotal / medias.size();
+        Log.d("Omar", "MediaTotal: " + mediaTotal + " Entre: " + medias.size());
+        //Log.d("Omar", "Total: " + mediaTotal);
+        return mediaTotal;
     }
 }

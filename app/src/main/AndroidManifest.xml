@@ -18,7 +18,8 @@
         android:roundIcon="@mipmap/iconoapp"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
-        <activity android:name=".MainActivity"
+        <activity
+            android:name=".MainActivity"
             android:theme="@style/SplashTheme">
             android:screenOrientation="portrait">
             <intent-filter>
@@ -27,7 +28,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Controladores.LectorActivity"></activity>
+        <activity android:name=".Controladores.LectorActivity" />
+        <activity android:name=".Controladores.GraficasActivity"></activity>
     </application>
 
 </manifest>
