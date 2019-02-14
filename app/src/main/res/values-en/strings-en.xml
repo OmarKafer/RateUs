@@ -19,5 +19,6 @@
     <string name="txtEscaneaTu">Scan your</string>
     <string name="txtCodigoQR"> QR code!</string>
     <string name="btnVotar">VOTE</string>
+    <string name="spinnerCiclo">Choose a course</string>
 
 </resources>

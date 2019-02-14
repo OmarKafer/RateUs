@@ -137,9 +137,9 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     public void ventanaConVotos() {
         permitirAtras = false;
-        rbComunicacion.setRating((float)1);
-        rbViabilidad.setRating((float)1);
-        rbCreatividad.setRating((float)1);
+        rbComunicacion.setRating((float)0);
+        rbViabilidad.setRating((float)0);
+        rbCreatividad.setRating((float)0);
         lEscanear.setVisibility(View.GONE);
         lVotos.setVisibility(View.VISIBLE);
         lBoton.setVisibility(View.VISIBLE);

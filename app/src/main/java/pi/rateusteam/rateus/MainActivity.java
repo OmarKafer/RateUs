@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
         FragmentTransaction transaction =
                 getSupportFragmentManager()
                         .beginTransaction()
-                        .setCustomAnimations(R.anim.fade_in, R.anim.fade_out)
+                        .setCustomAnimations(R.anim.left_in, R.anim.left_out)
                         .replace(R.id.container, fragment);
 
         if (addToBackstack) {
