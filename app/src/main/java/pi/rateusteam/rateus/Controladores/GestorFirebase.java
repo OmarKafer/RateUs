@@ -234,7 +234,7 @@ public class GestorFirebase {
                         }
                     });
                 }
-
+                actualizarGraficas(grafica, dataset, data);
             }
 
             @Override
@@ -244,31 +244,17 @@ public class GestorFirebase {
         });
     }
 
-    public void actualizarGraficas(final BarChart grafica) {
-        final ArrayList<BarEntry> entries = new ArrayList<>();
+    public void actualizarGraficas(final BarChart grafica, final BarDataSet dataset, final BarData data) {
         final ArrayList<Voto> votos = new ArrayList<>();
-        final BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        final BarData data = new BarData(dataset);
-        data.setBarWidth((float)0.9);
-        grafica.setData(data);
-        grafica.setFitBars(true);
-        grafica.getAxisRight().setDrawGridLines(false);
-        grafica.getAxisLeft().setDrawGridLines(false);
-        grafica.getXAxis().setDrawGridLines(false);
-        axisX = 0;
 
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                data.removeDataSet(dataset);
-                grafica.notifyDataSetChanged();
-                grafica.invalidate();
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
                     votos.clear();
                     String idProyecto = i.child("idUsuario").getValue(String.class);
-                    final int axisXProyecto = i.child("axisX").getValue(Integer.class);
+                    final int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
                     DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(idProyecto).child("votos");
                     databaseAux.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -277,12 +263,9 @@ public class GestorFirebase {
                                 votos.add(i.getValue(Voto.class));
                             }
                             float media = calcularMedia(votos);
-                            Log.d("Omar", "AxisX: " + axisX + " Media: " + media);
-                            BarEntry entrada = new BarEntry(axisX, media);
-                            dataset.addEntry(entrada);
-                            float[] test ={axisX, media};
-                            entries.get(axisXProyecto).setVals(test);
-                            data.addDataSet(dataset);
+                            float[] test ={axisXProyecto, media};
+                            dataset.getEntryForIndex(axisXProyecto).setVals(test);
+                            dataset.notifyDataSetChanged();
                             data.notifyDataChanged(); // let the data know a dataSet changed
                             grafica.notifyDataSetChanged(); // let the chart know it's data changed
                             grafica.invalidate();
