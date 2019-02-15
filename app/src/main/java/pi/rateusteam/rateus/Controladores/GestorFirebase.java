@@ -16,9 +16,13 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
+import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -251,9 +255,19 @@ public class GestorFirebase {
                     Log.d("Omar", "Suma de las medias del proyecto: " + sumaMedias + " Número de votos: " + numVotos + " AxisX: " + axisXProyecto + " Media Del Proyecto: " + mediaProyecto);
                 }
                 BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
-                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                dataset.setColors(ColorTemplate.LIBERTY_COLORS);
+                dataset.setDrawValues(false);
                 BarData data = new BarData(dataset);
                 data.setBarWidth((float)0.9);
+                YAxis rightYAxis = grafica.getAxisRight();
+                YAxis leftYAxis = grafica.getAxisLeft();
+                rightYAxis.setAxisMaxValue(5);
+                rightYAxis.setAxisMinValue(0);
+                rightYAxis.setLabelCount(10);
+                leftYAxis.setAxisMaxValue(5);
+                leftYAxis.setAxisMinValue(0);
+                leftYAxis.setLabelCount(10);
+                grafica.getXAxis().setDrawLabels(false);
                 grafica.setData(data);
                 grafica.notifyDataSetChanged();
                 grafica.invalidate();
