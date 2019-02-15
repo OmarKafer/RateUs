@@ -203,6 +203,10 @@ public class GestorFirebase {
         grafica.getAxisLeft().setDrawGridLines(false);
         grafica.getXAxis().setDrawGridLines(false);
 
+        data.notifyDataChanged(); // let the data know a dataSet changed
+        grafica.notifyDataSetChanged(); // let the chart know it's data changed
+        grafica.invalidate();
+
         final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -234,7 +238,21 @@ public class GestorFirebase {
                         }
                     });
                 }
-                actualizarGraficas(grafica, dataset, data);
+                new Thread(new Runnable() {
+                    public void run() {
+                        try {
+                            synchronized (this) {
+                                wait(3000);
+                                // limpiamos el token
+                                crearGraficas(grafica);
+                            }
+                        } catch (InterruptedException e) {
+                            // TODO Auto-generated catch block
+                            Log.e("Error", "Waiting didnt work!!");
+                            e.printStackTrace();
+                        }
+                    }
+                }).start();
             }
 
             @Override
@@ -243,6 +261,8 @@ public class GestorFirebase {
             }
         });
     }
+
+
 
     public void actualizarGraficas(final BarChart grafica, final BarDataSet dataset, final BarData data) {
         final ArrayList<Voto> votos = new ArrayList<>();

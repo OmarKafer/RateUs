@@ -9,6 +9,7 @@ public class Proyecto {
     private String idUsuario;
     private String ciclo;
     private int axisXProyecto;
+    private float media;
 
     public Proyecto(){}
 
@@ -17,6 +18,7 @@ public class Proyecto {
         this.descripcion = descripcion;
         this.ciclo = ciclo;
         axisXProyecto = 0;
+        media = 0;
     }
 
     public String getTitulo() {
