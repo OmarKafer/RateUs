@@ -7,7 +7,9 @@ import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.solver.widgets.Snapshot;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,15 +58,22 @@ public class GestorFirebase {
     private int axisX = 0;
 
     private GestorPreferencias gestorPreferencias;
+    private GestorGraficas gestorGraficas;
 
     public GestorFirebase(Activity activity) {
         mAuth = FirebaseAuth.getInstance();
         this.activity = activity;
         gestorErrores = new GestorErrores(activity.getApplicationContext());
         gestorPreferencias = new GestorPreferencias(activity);
-
-
     }
+    public GestorFirebase(Activity activity, GestorGraficas gestorGraficas) {
+        mAuth = FirebaseAuth.getInstance();
+        this.activity = activity;
+        gestorErrores = new GestorErrores(activity.getApplicationContext());
+        gestorPreferencias = new GestorPreferencias(activity);
+        this.gestorGraficas = gestorGraficas;
+    }
+
 
     public void login(final String email, String contrasenya) {
         mAuth.signInWithEmailAndPassword(email, contrasenya)
@@ -118,10 +127,25 @@ public class GestorFirebase {
         });
     }
 
-    public void anyadirVoto(Voto v) {
-        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario()).child("votos");
-        database.child(v.getIdVotante()).setValue(v);
-        gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");  // PONER EN STRINGS
+    public void anyadirVoto(final Voto v) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                float mediaActual = dataSnapshot.child("media").getValue(Float.class);
+                int numVotos = dataSnapshot.child("numVotos").getValue(Integer.class);
+                DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
+                databaseAux.child("votos").child(v.getIdVotante()).setValue(v);
+                databaseAux.child("numVotos").setValue(numVotos+1);
+                databaseAux.child("media").setValue(mediaActual+v.getMediaVoto());
+                gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");  // PONER EN STRINGS
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
     }
 
     public void recuperarProyecto(final TextView txtTitulo, final TextView txtDescripcion, final ImageView imgLogo) {
@@ -173,7 +197,7 @@ public class GestorFirebase {
         q.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                if(dataSnapshot.hasChildren()) {
+                if (dataSnapshot.hasChildren()) {
                     // El voto de este usuario ya se ha registrado.
                     f.ventanaSinVotos();
                     gestorErrores.mostrarError("Este QR ya ha votado el proyecto.");  // METER A STRINGS
@@ -190,115 +214,49 @@ public class GestorFirebase {
         });
     }
 
-    public void crearGraficas(final BarChart grafica) {
+    public void cargarAxisX() {
+        axisX = 0;
+        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        database.addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                        Proyecto p = i.getValue(Proyecto.class);
+                        database.child(p.getIdUsuario()).child("axisXProyecto").setValue(axisX);
+                        axisX++;
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void cargarGraficas(final BarChart grafica) {
         final ArrayList<BarEntry> entries = new ArrayList<>();
-        final ArrayList<Voto> votos = new ArrayList<>();
-        final BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
-        dataset.setColors(ColorTemplate.COLORFUL_COLORS);
-        final BarData data = new BarData(dataset);
-        data.setBarWidth((float)0.9);
-        grafica.setData(data);
-        grafica.setFitBars(true);
-        grafica.getAxisRight().setDrawGridLines(false);
-        grafica.getAxisLeft().setDrawGridLines(false);
-        grafica.getXAxis().setDrawGridLines(false);
-
-        data.notifyDataChanged(); // let the data know a dataSet changed
-        grafica.notifyDataSetChanged(); // let the chart know it's data changed
-        grafica.invalidate();
-
-        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
-                    votos.clear();
-                    final String idProyecto = i.child("idUsuario").getValue(String.class);
-                    DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(idProyecto).child("votos");
-                    databaseAux.addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for(DataSnapshot i: dataSnapshot.getChildren()) {
-                                votos.add(i.getValue(Voto.class));
-                            }
-                            float media = calcularMedia(votos);
-                            Log.d("Omar", "AxisX: " + axisX + " Media: " + media);
-                            database.child(idProyecto).child("axisXProyecto").setValue(axisX);
-                            BarEntry entrada = new BarEntry(axisX, media);
-                            dataset.addEntry(entrada);
-                            data.notifyDataChanged(); // let the data know a dataSet changed
-                            grafica.notifyDataSetChanged(); // let the chart know it's data changed
-                            grafica.invalidate();
-                            axisX++;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
-                }
-                new Thread(new Runnable() {
-                    public void run() {
-                        try {
-                            synchronized (this) {
-                                wait(3000);
-                                // limpiamos el token
-                                crearGraficas(grafica);
-                            }
-                        } catch (InterruptedException e) {
-                            // TODO Auto-generated catch block
-                            Log.e("Error", "Waiting didnt work!!");
-                            e.printStackTrace();
-                        }
+                    float sumaMedias = i.child("media").getValue(Float.class);
+                    int numVotos = i.child("numVotos").getValue(Integer.class);
+                    int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
+                    float mediaProyecto = sumaMedias/numVotos;
+                    if(numVotos>0){
+                        entries.add(new BarEntry(axisXProyecto, mediaProyecto));
                     }
-                }).start();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-    }
-
-
-
-    public void actualizarGraficas(final BarChart grafica, final BarDataSet dataset, final BarData data) {
-        final ArrayList<Voto> votos = new ArrayList<>();
-
-        final DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
-        database.addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                for(DataSnapshot i: dataSnapshot.getChildren()) {
-                    votos.clear();
-                    String idProyecto = i.child("idUsuario").getValue(String.class);
-                    final int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
-                    DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(idProyecto).child("votos");
-                    databaseAux.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            for(DataSnapshot i: dataSnapshot.getChildren()) {
-                                votos.add(i.getValue(Voto.class));
-                            }
-                            float media = calcularMedia(votos);
-                            float[] test ={axisXProyecto, media};
-                            dataset.getEntryForIndex(axisXProyecto).setVals(test);
-                            dataset.notifyDataSetChanged();
-                            data.notifyDataChanged(); // let the data know a dataSet changed
-                            grafica.notifyDataSetChanged(); // let the chart know it's data changed
-                            grafica.invalidate();
-                            axisX++;
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                        }
-                    });
+                    Log.d("Omar", "Suma de las medias del proyecto: " + sumaMedias + " Número de votos: " + numVotos + " AxisX: " + axisXProyecto + " Media Del Proyecto: " + mediaProyecto);
                 }
-
+                BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
+                dataset.setColors(ColorTemplate.COLORFUL_COLORS);
+                BarData data = new BarData(dataset);
+                data.setBarWidth((float)0.9);
+                grafica.setData(data);
+                grafica.notifyDataSetChanged();
+                grafica.invalidate();
             }
 
             @Override
@@ -306,26 +264,5 @@ public class GestorFirebase {
 
             }
         });
-    }
-
-    private float calcularMedia(ArrayList<Voto> votos) {
-        ArrayList<Float> medias = new ArrayList<>();
-        medias.clear();
-        Iterator it = votos.iterator();
-        while(it.hasNext()) {
-            Voto v = (Voto) it.next();
-            medias.add((float)(v.getVotoComunicacion() + v.getVotoCreatividad() + v.getVotoViabilidad())/3);
-            Log.d("Operacion", "Nueva Media: " + (float)(v.getVotoComunicacion() + v.getVotoCreatividad() + v.getVotoViabilidad())/3);
-        }
-        float mediaTotal = 0;
-
-        it = medias.iterator();
-        while(it.hasNext()) {
-            mediaTotal += (float)it.next();
-        }
-        mediaTotal = mediaTotal / medias.size();
-        Log.d("Omar", "MediaTotal: " + mediaTotal + " Entre: " + medias.size());
-        //Log.d("Omar", "Total: " + mediaTotal);
-        return mediaTotal;
     }
 }

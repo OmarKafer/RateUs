@@ -2,6 +2,8 @@ package pi.rateusteam.rateus.Controladores;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.KeyEvent;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.Description;
@@ -27,5 +29,15 @@ public class GraficasActivity extends AppCompatActivity {
         BarChart grafica = (BarChart) findViewById(R.id.grafica);
         gestorGraficas = new GestorGraficas(grafica, this);
         gestorGraficas.initChart();
+    }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK && event.getRepeatCount() == 0) {
+            Log.d("Omar", "Sales del activity de las gráficas");
+            gestorGraficas.matarHilo();
+            return super.onKeyDown(keyCode, event);
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }

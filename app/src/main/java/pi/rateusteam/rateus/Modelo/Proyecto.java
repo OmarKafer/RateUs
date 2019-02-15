@@ -10,15 +10,17 @@ public class Proyecto {
     private String ciclo;
     private int axisXProyecto;
     private float media;
+    private int numVotos;
 
     public Proyecto(){}
 
-    public Proyecto(String titulo, String descripcion, String idUsuario, String ciclo) {
+    public Proyecto(String titulo, String descripcion, String idUsuario, String ciclo, float media, int numVotos) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.ciclo = ciclo;
         axisXProyecto = 0;
-        media = 0;
+        this.media = media;
+        this.numVotos = numVotos;
     }
 
     public String getTitulo() {
@@ -59,5 +61,21 @@ public class Proyecto {
 
     public void setAxisXProyecto(int axisXProyecto) {
         this.axisXProyecto = axisXProyecto;
+    }
+
+    public float getMedia() {
+        return media;
+    }
+
+    public void setMedia(float media) {
+        this.media = media;
+    }
+
+    public int getNumVotos() {
+        return numVotos;
+    }
+
+    public void setNumVotos(int numVotos) {
+        this.numVotos = numVotos;
     }
 }
