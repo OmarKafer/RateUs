@@ -25,7 +25,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1.5"
                 android:orientation="horizontal"
-                android:paddingRight="5dp">
+                android:paddingRight="5dp"
+                android:paddingTop="5dp">
 
                 <TextView
                     android:id="@+id/txtTitulo"
@@ -169,6 +170,24 @@
                 android:textColor="#ffffff"
                 android:textSize="18dp"
                 android:background="@drawable/btn_entrar" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/lVerEstadisticas"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.3"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtVerEstadisticas"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2"
+                android:text="@string/verEstadisticas"
+                android:textSize="18dp"
+                android:gravity="center"/>
 
         </LinearLayout>
 

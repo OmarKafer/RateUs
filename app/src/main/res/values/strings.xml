@@ -18,6 +18,7 @@
     <string name="txtCodigoQR">código QR!</string>
     <string name="btnVotar">VOTAR</string>
     <string name="spinnerCiclo">Seleccione un ciclo</string>
+    <string name="verEstadisticas"><u>Ver estadísticas</u></string>
 
     <string-array name="ciclos">
         <item>@string/spinnerCiclo</item>
