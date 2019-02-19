@@ -13,7 +13,7 @@
         android:layout_weight="1"
         android:drawSelectorOnTop="true"
         android:entries="@array/ciclos"
-        android:spinnerMode="dialog" />
+        android:spinnerMode="dialog"/>
 
     <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/grafica"
