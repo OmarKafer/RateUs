@@ -1,14 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Controladores.GraficasActivity">
 
-    <com.github.mikephil.charting.charts.HorizontalBarChart
+    <Spinner
+        android:id="@+id/spinnerCicloGraficas"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:drawSelectorOnTop="true"
+        android:entries="@array/ciclos"
+        android:spinnerMode="dialog" />
+
+    <com.github.mikephil.charting.charts.BarChart
         android:id="@+id/grafica"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="9" />
 
 
-</android.support.constraint.ConstraintLayout>
+</LinearLayout>
