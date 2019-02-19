@@ -5,6 +5,7 @@ import android.graphics.Color;
 import android.util.Log;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
@@ -15,10 +16,10 @@ import java.util.ArrayList;
 public class GestorGraficas {
 
     private Thread hilo;
-    private BarChart grafica;
+    private HorizontalBarChart grafica;
     private GestorFirebase gestorFirebase;
 
-    public GestorGraficas(BarChart grafica, Activity activity) {
+    public GestorGraficas(HorizontalBarChart grafica, Activity activity) {
         this.grafica = grafica;
         gestorFirebase = new GestorFirebase(activity, this);
     }

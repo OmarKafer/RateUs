@@ -6,6 +6,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -26,7 +27,7 @@ public class GraficasActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficas);
 
-        BarChart grafica = (BarChart) findViewById(R.id.grafica);
+        HorizontalBarChart grafica = (HorizontalBarChart) findViewById(R.id.grafica);
         gestorGraficas = new GestorGraficas(grafica, this);
         gestorGraficas.initChart();
     }

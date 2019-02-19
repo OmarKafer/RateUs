@@ -3,6 +3,7 @@ package pi.rateusteam.rateus.Controladores;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.solver.widgets.Snapshot;
@@ -16,13 +17,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.HorizontalBarChart;
 import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
+import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.utils.ColorTemplate;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -60,6 +65,7 @@ public class GestorFirebase {
     private Activity activity;
     private GestorErrores gestorErrores;
     private int axisX = 0;
+    static String[] arrayLabels;
 
     private GestorPreferencias gestorPreferencias;
     private GestorGraficas gestorGraficas;
@@ -238,27 +244,54 @@ public class GestorFirebase {
         });
     }
 
-    public void cargarGraficas(final BarChart grafica) {
+    public void cargarGraficas(final HorizontalBarChart grafica) {
         final ArrayList<BarEntry> entries = new ArrayList<>();
+        final ArrayList<String> labels = new ArrayList<>();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    String idProyecto = i.child("idUsuario").getValue(String.class);
                     float sumaMedias = i.child("media").getValue(Float.class);
                     int numVotos = i.child("numVotos").getValue(Integer.class);
                     int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
                     float mediaProyecto = sumaMedias/numVotos;
                     if(numVotos>0){
-                        entries.add(new BarEntry(axisXProyecto, mediaProyecto));
+                        if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
+                            //labels.add(i.child("titulo").getValue(String.class));
+                            entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
+                            Log.d("Omar", i.child("titulo").getValue(String.class));
+                        } else {
+                            //labels.add("");
+                            entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
+                        }
+                        labels.add(i.child("titulo").getValue(String.class)); // TEST
                     }
-                    Log.d("Omar", "Suma de las medias del proyecto: " + sumaMedias + " Número de votos: " + numVotos + " AxisX: " + axisXProyecto + " Media Del Proyecto: " + mediaProyecto);
                 }
+
+                /*arrayLabels = new String[labels.size()];
+                arrayLabels = labels.toArray(arrayLabels);
+                IAxisValueFormatter formatter = new IAxisValueFormatter() {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        Log.d("Omar", "Valor del array ahora: " + (int)value);
+                        String valor = arrayLabels[(int)value];
+                        return valor;
+                    }
+                };
+
+                XAxis xAxis = grafica.getXAxis();
+                xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
+                xAxis.setValueFormatter(formatter);*/
+
                 BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
                 dataset.setColors(ColorTemplate.LIBERTY_COLORS);
                 dataset.setDrawValues(false);
+
                 BarData data = new BarData(dataset);
                 data.setBarWidth((float)0.9);
+
                 YAxis rightYAxis = grafica.getAxisRight();
                 YAxis leftYAxis = grafica.getAxisLeft();
                 rightYAxis.setAxisMaxValue(5);
@@ -267,7 +300,19 @@ public class GestorFirebase {
                 leftYAxis.setAxisMaxValue(5);
                 leftYAxis.setAxisMinValue(0);
                 leftYAxis.setLabelCount(10);
-                grafica.getXAxis().setDrawLabels(false);
+
+                grafica.setFitBars(true); // make the x-axis fit exactly all bars
+                //grafica.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+                grafica.getXAxis().setCenterAxisLabels(true);
+                //grafica.getXAxis().setLabelCount(labels.size());
+                //grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+                grafica.getXAxis().setLabelCount(Integer.MAX_VALUE, true);
+                grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels) {
+                    @Override
+                    public String getFormattedValue(float value, AxisBase axis) {
+                        return super.getFormattedValue(value, axis);
+                    }
+                });
                 grafica.setData(data);
                 grafica.notifyDataSetChanged();
                 grafica.invalidate();
