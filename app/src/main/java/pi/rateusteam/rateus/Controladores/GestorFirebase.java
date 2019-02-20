@@ -117,6 +117,7 @@ public class GestorFirebase {
                             guardarDatosProyecto(p, uri);
                             gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");   // PONER EN STRINGS
                             mAuth.signOut();
+                            cargarAxisX();
                             ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
                         } else {
                             gestorErrores.mostrarError("ERROR: No se ha podido crear el proyecto: " + task.getException()); // PONER EN STRINGS
@@ -257,33 +258,24 @@ public class GestorFirebase {
                     int numVotos = i.child("numVotos").getValue(Integer.class);
                     int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
                     float mediaProyecto = sumaMedias/numVotos;
-                    if(numVotos>0){
-                        if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
-                            //labels.add(i.child("titulo").getValue(String.class));
-                            entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
-                            Log.d("Omar", i.child("titulo").getValue(String.class));
-                        } else {
-                            //labels.add("");
-                            entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
-                        }
-                        labels.add(i.child("titulo").getValue(String.class)); // TEST
+
+                    if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
+                        labels.add(i.child("titulo").getValue(String.class));
+                        entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
+                    } else {
+                        labels.add("");
+                        entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
                     }
+
+                    //labels.add(i.child("titulo").getValue(String.class)); // TEST
+
                 }
 
-                /*arrayLabels = new String[labels.size()];
-                arrayLabels = labels.toArray(arrayLabels);
-                IAxisValueFormatter formatter = new IAxisValueFormatter() {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        Log.d("Omar", "Valor del array ahora: " + (int)value);
-                        String valor = arrayLabels[(int)value];
-                        return valor;
-                    }
-                };
-
+                grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
                 XAxis xAxis = grafica.getXAxis();
-                xAxis.setGranularity(1f); // minimum axis-step (interval) is 1
-                xAxis.setValueFormatter(formatter);*/
+                xAxis.setGranularity(0.7f);
+                xAxis.setGranularityEnabled(true);
+                grafica.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
 
                 BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
                 dataset.setColors(ColorTemplate.LIBERTY_COLORS);
@@ -301,18 +293,9 @@ public class GestorFirebase {
                 leftYAxis.setAxisMinValue(0);
                 leftYAxis.setLabelCount(10);
 
-                grafica.setFitBars(true); // make the x-axis fit exactly all bars
-                //grafica.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
-                grafica.getXAxis().setCenterAxisLabels(true);
-                //grafica.getXAxis().setLabelCount(labels.size());
-                //grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
-                grafica.getXAxis().setLabelCount(Integer.MAX_VALUE, true);
-                grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels) {
-                    @Override
-                    public String getFormattedValue(float value, AxisBase axis) {
-                        return super.getFormattedValue(value, axis);
-                    }
-                });
+                //grafica.setFitBars(true); // make the x-axis fit exactly all bars
+                //grafica.getXAxis().setCenterAxisLabels(true);
+                grafica.setScaleEnabled(false);
                 grafica.setData(data);
                 grafica.notifyDataSetChanged();
                 grafica.invalidate();

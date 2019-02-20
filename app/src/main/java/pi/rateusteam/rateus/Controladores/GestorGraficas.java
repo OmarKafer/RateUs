@@ -41,7 +41,7 @@ public class GestorGraficas {
             public void run() {
                 try {
                     synchronized (this) {
-                        gestorFirebase.cargarAxisX();
+                        //gestorFirebase.cargarAxisX();
                         while(true) {
                             wait(2000);
                             gestorFirebase.cargarGraficas(grafica);
