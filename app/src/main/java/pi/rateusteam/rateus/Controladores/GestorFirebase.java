@@ -263,7 +263,7 @@ public class GestorFirebase {
                         labels.add(i.child("titulo").getValue(String.class));
                         entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
                     } else {
-                        labels.add("");
+                        labels.add(i.child("titulo").getValue(String.class));
                         entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
                     }
 
@@ -275,6 +275,8 @@ public class GestorFirebase {
                 XAxis xAxis = grafica.getXAxis();
                 xAxis.setGranularity(0.7f);
                 xAxis.setGranularityEnabled(true);
+                xAxis.setTextSize(50 - entries.size());
+                xAxis.setTextColor(Color.rgb(39, 45, 60));
                 grafica.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
 
                 BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
@@ -288,10 +290,10 @@ public class GestorFirebase {
                 YAxis leftYAxis = grafica.getAxisLeft();
                 rightYAxis.setAxisMaxValue(5);
                 rightYAxis.setAxisMinValue(0);
-                rightYAxis.setLabelCount(10);
+                rightYAxis.setLabelCount(5);
                 leftYAxis.setAxisMaxValue(5);
                 leftYAxis.setAxisMinValue(0);
-                leftYAxis.setLabelCount(10);
+                leftYAxis.setLabelCount(5);
 
                 //grafica.setFitBars(true); // make the x-axis fit exactly all bars
                 //grafica.getXAxis().setCenterAxisLabels(true);
