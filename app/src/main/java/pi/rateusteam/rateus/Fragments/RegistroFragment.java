@@ -98,7 +98,7 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
             case R.id.btnGuardar:
                 if(comprobarCampos()) {
                     if(comprobarContrasenyas()) {
-                        Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString(), null, spinnerCiclo.getSelectedItem().toString(), 0, 0);
+                        Proyecto p = new Proyecto(txtTitulo.getText().toString(), txtDescripcion.getText().toString(), null, spinnerCiclo.getSelectedItem().toString(), 0, 0, 0, 0, 0);
                         gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p, uri);
                     } else {
                         // Contraseñas no coinciden

@@ -4,6 +4,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -21,14 +24,28 @@ import pi.rateusteam.rateus.R;
 public class GraficasActivity extends AppCompatActivity {
 
     private GestorGraficas gestorGraficas;
+    private Spinner spinnerCategoriaGraficas;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficas);
 
+        spinnerCategoriaGraficas = findViewById(R.id.spinnerCategoriaGraficas);
+        spinnerCategoriaGraficas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                gestorGraficas.setCiclo(spinnerCategoriaGraficas.getSelectedItem().toString());
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
         HorizontalBarChart grafica = (HorizontalBarChart) findViewById(R.id.grafica);
-        gestorGraficas = new GestorGraficas(grafica, this);
+        gestorGraficas = new GestorGraficas(grafica, this, spinnerCategoriaGraficas.getSelectedItem().toString());
         gestorGraficas.initChart();
     }
 

@@ -11,16 +11,22 @@ public class Proyecto {
     private int axisXProyecto;
     private float media;
     private int numVotos;
+    private float mediaViabilidad;
+    private float mediaComunicacion;
+    private float mediaCreatividad;
 
     public Proyecto(){}
 
-    public Proyecto(String titulo, String descripcion, String idUsuario, String ciclo, float media, int numVotos) {
+    public Proyecto(String titulo, String descripcion, String idUsuario, String ciclo, float media, int numVotos, float mediaViabilidad, float mediaComunicacion, float mediaCreatividad) {
         this.titulo = titulo;
         this.descripcion = descripcion;
         this.ciclo = ciclo;
         axisXProyecto = 0;
         this.media = media;
         this.numVotos = numVotos;
+        this.mediaViabilidad = mediaViabilidad;
+        this.mediaComunicacion = mediaComunicacion;
+        this.mediaCreatividad = mediaCreatividad;
     }
 
     public String getTitulo() {
@@ -77,5 +83,29 @@ public class Proyecto {
 
     public void setNumVotos(int numVotos) {
         this.numVotos = numVotos;
+    }
+
+    public float getMediaViabilidad() {
+        return mediaViabilidad;
+    }
+
+    public void setMediaViabilidad(float mediaViabilidad) {
+        this.mediaViabilidad = mediaViabilidad;
+    }
+
+    public float getMediaComunicacion() {
+        return mediaComunicacion;
+    }
+
+    public void setMediaComunicacion(float mediaComunicacion) {
+        this.mediaComunicacion = mediaComunicacion;
+    }
+
+    public float getMediaCreatividad() {
+        return mediaCreatividad;
+    }
+
+    public void setMediaCreatividad(float mediaCreatividad) {
+        this.mediaCreatividad = mediaCreatividad;
     }
 }

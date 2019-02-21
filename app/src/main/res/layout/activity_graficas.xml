@@ -7,12 +7,12 @@
     tools:context=".Controladores.GraficasActivity">
 
     <Spinner
-        android:id="@+id/spinnerCicloGraficas"
+        android:id="@+id/spinnerCategoriaGraficas"
         android:layout_width="wrap_content"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:drawSelectorOnTop="true"
-        android:entries="@array/ciclos"
+        android:entries="@array/ciclosGraficas"
         android:spinnerMode="dialog"/>
 
     <com.github.mikephil.charting.charts.HorizontalBarChart

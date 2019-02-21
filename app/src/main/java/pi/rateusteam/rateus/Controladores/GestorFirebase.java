@@ -40,6 +40,7 @@ import pi.rateusteam.rateus.Fragments.LectorFragment;
 import pi.rateusteam.rateus.Fragments.LoginFragment;
 import pi.rateusteam.rateus.Fragments.VotacionFragment;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
+import pi.rateusteam.rateus.Modelo.EntradaProyecto;
 import pi.rateusteam.rateus.Modelo.Proyecto;
 import pi.rateusteam.rateus.Modelo.Voto;
 
@@ -55,6 +56,9 @@ import com.google.firebase.storage.UploadTask;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Enumeration;
 import java.util.Iterator;
 
 public class GestorFirebase {
@@ -144,11 +148,17 @@ public class GestorFirebase {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 float mediaActual = dataSnapshot.child("media").getValue(Float.class);
+                float mediaViabilidadActual = dataSnapshot.child("mediaViabilidad").getValue(Float.class);
+                float mediaComunicacionActual = dataSnapshot.child("mediaComunicacion").getValue(Float.class);
+                float mediaCreatividadActual = dataSnapshot.child("mediaCreatividad").getValue(Float.class);
                 int numVotos = dataSnapshot.child("numVotos").getValue(Integer.class);
                 DatabaseReference databaseAux = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
                 databaseAux.child("votos").child(v.getIdVotante()).setValue(v);
                 databaseAux.child("numVotos").setValue(numVotos+1);
-                databaseAux.child("media").setValue(mediaActual+v.getMediaVoto());
+                databaseAux.child("media").setValue(mediaActual + v.getMediaVoto());
+                databaseAux.child("mediaViabilidad").setValue(mediaViabilidadActual + v.getVotoViabilidad());
+                databaseAux.child("mediaComunicacion").setValue(mediaComunicacionActual + v.getVotoComunicacion());
+                databaseAux.child("mediaCreatividad").setValue(mediaCreatividadActual + v.getVotoCreatividad());
                 gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");  // PONER EN STRINGS
             }
 
@@ -245,8 +255,9 @@ public class GestorFirebase {
         });
     }
 
-    public void cargarGraficas(final HorizontalBarChart grafica) {
+    public void cargarGraficas(final HorizontalBarChart grafica, final String categoria) {
         final ArrayList<BarEntry> entries = new ArrayList<>();
+        //final ArrayList<EntradaProyecto> proyectos = new ArrayList<>();
         final ArrayList<String> labels = new ArrayList<>();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -254,7 +265,22 @@ public class GestorFirebase {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
                     String idProyecto = i.child("idUsuario").getValue(String.class);
-                    float sumaMedias = i.child("media").getValue(Float.class);
+                    String txtMedia = "media";
+                    switch (categoria) {
+                        case "General":
+                            txtMedia = "media";
+                            break;
+                        case "Viabilidad":
+                            txtMedia = "mediaViabilidad";
+                            break;
+                        case "Comunicación":
+                            txtMedia = "mediaComunicacion";
+                            break;
+                        case "Creatividad":
+                            txtMedia = "mediaCreatividad";
+                            break;
+                    }
+                    float sumaMedias = i.child(txtMedia).getValue(Float.class);
                     int numVotos = i.child("numVotos").getValue(Integer.class);
                     int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
                     float mediaProyecto = sumaMedias/numVotos;
@@ -262,42 +288,59 @@ public class GestorFirebase {
                     if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
                         labels.add(i.child("titulo").getValue(String.class));
                         entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
+                        //proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
                     } else {
-                        labels.add(i.child("titulo").getValue(String.class));
+                        labels.add("");
                         entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
+                        //proyectos.add(new EntradaProyecto("", axisXProyecto, mediaProyecto));
                     }
-
-                    //labels.add(i.child("titulo").getValue(String.class)); // TEST
 
                 }
 
+                //final ArrayList<BarEntry> entries = listarMejoresProyectos(proyectos);
+
+                // Animación de las barras
+                //grafica.animateXY(100, 100);
+                // Descripción de la gráfica
+                grafica.getDescription().setText("");
+                // Color de fondo
+                grafica.setBackgroundColor(Color.WHITE);
+                // Le asignamos el nombre de los labels a cada barra
                 grafica.getXAxis().setValueFormatter(new IndexAxisValueFormatter(labels));
+                // Deshabilitar el zoom
+                grafica.setScaleEnabled(false);
+
+                // Diseño del axis X
                 XAxis xAxis = grafica.getXAxis();
+                xAxis.setDrawGridLines(false);
                 xAxis.setGranularity(0.7f);
                 xAxis.setGranularityEnabled(true);
-                xAxis.setTextSize(50 - entries.size());
+                xAxis.setTextSize(40 - entries.size());
                 xAxis.setTextColor(Color.rgb(39, 45, 60));
-                grafica.getXAxis().setPosition(XAxis.XAxisPosition.TOP_INSIDE);
+                xAxis.setPosition(XAxis.XAxisPosition.TOP_INSIDE);
 
-                BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
-                dataset.setColors(ColorTemplate.LIBERTY_COLORS);
-                dataset.setDrawValues(false);
-
-                BarData data = new BarData(dataset);
-                data.setBarWidth((float)0.9);
-
+                // Diseño de los axis Y
                 YAxis rightYAxis = grafica.getAxisRight();
                 YAxis leftYAxis = grafica.getAxisLeft();
+                rightYAxis.setDrawGridLines(false);
                 rightYAxis.setAxisMaxValue(5);
                 rightYAxis.setAxisMinValue(0);
                 rightYAxis.setLabelCount(5);
+                leftYAxis.setDrawGridLines(false);
                 leftYAxis.setAxisMaxValue(5);
                 leftYAxis.setAxisMinValue(0);
                 leftYAxis.setLabelCount(5);
 
-                //grafica.setFitBars(true); // make the x-axis fit exactly all bars
-                //grafica.getXAxis().setCenterAxisLabels(true);
-                grafica.setScaleEnabled(false);
+                // Asignamos los datos de las entradas al dataset
+                BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
+                dataset.setColors(ColorTemplate.LIBERTY_COLORS);
+                dataset.setDrawValues(false);
+
+                // Asignamos el dataset a los datos de la gráfica
+                BarData data = new BarData(dataset);
+                data.setBarWidth((float)0.9);
+
+                // Metemos los datos en la gráfica, notificamos del cambio y actualizamos.
                 grafica.setData(data);
                 grafica.notifyDataSetChanged();
                 grafica.invalidate();
@@ -309,4 +352,34 @@ public class GestorFirebase {
             }
         });
     }
+
+    private ArrayList<BarEntry> listarMejoresProyectos(ArrayList<EntradaProyecto> proyectos) {
+        ArrayList<BarEntry> entries = new ArrayList<>();
+        Collections.sort(proyectos, new Comparator<EntradaProyecto>() {
+            @Override
+            public int compare(EntradaProyecto ep1, EntradaProyecto ep2) {
+                if (ep1.getMedia() == ep2.getMedia()) {
+                    return 0;
+                } else if (ep1.getMedia() >= ep2.getMedia()) {
+                    return -1;
+                } else {
+                    return 1;
+                }
+            }
+        });
+
+        Iterator<EntradaProyecto> iterador = proyectos.iterator();
+        int cont = 0;
+        while(iterador.hasNext()) {
+            if(cont<5) {
+                EntradaProyecto ep = iterador.next();
+                entries.add(new BarEntry(cont, ep.getMedia()));
+            } else {
+                break;
+            }
+        }
+
+        return entries;
+    }
+
 }

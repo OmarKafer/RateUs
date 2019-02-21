@@ -18,22 +18,24 @@ public class GestorGraficas {
     private Thread hilo;
     private HorizontalBarChart grafica;
     private GestorFirebase gestorFirebase;
+    private String ciclo;
 
-    public GestorGraficas(HorizontalBarChart grafica, Activity activity) {
+    public GestorGraficas(HorizontalBarChart grafica, Activity activity, String ciclo) {
         this.grafica = grafica;
         gestorFirebase = new GestorFirebase(activity, this);
+        this.ciclo = ciclo;
+    }
+
+    public String getCiclo() {
+        return ciclo;
+    }
+
+    public void setCiclo(String ciclo) {
+        this.ciclo = ciclo;
     }
 
     public void initChart() {
-        grafica.animateXY(1000, 1000);
-        grafica.getDescription().setText("");
-        grafica.setBackgroundColor(Color.WHITE);
-        grafica.getAxisRight().setDrawGridLines(false);
-        grafica.getAxisLeft().setDrawGridLines(false);
-        grafica.getXAxis().setDrawGridLines(false);
-
         iniciarHilo();
-
     }
 
     private void iniciarHilo() {
@@ -44,7 +46,7 @@ public class GestorGraficas {
                         //gestorFirebase.cargarAxisX();
                         while(true) {
                             wait(2000);
-                            gestorFirebase.cargarGraficas(grafica);
+                            gestorFirebase.cargarGraficas(grafica, ciclo);
                             Thread.interrupted();
                         }
                     }

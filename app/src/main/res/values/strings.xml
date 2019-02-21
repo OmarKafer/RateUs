@@ -25,7 +25,20 @@
         <item>EDI</item>
         <item>DAM</item>
         <item>DAW</item>
-        <item>ADE</item>
+        <item>Márketing y publicidad</item>
+        <item>Videojuegos</item>
+        <item>Robótica</item>
+        <item>TAFAD</item>
+        <item>ASIR</item>
+        <item>GVEC</item>
+        <item>Mecatrónica</item>
+    </string-array>
+
+    <string-array name="ciclosGraficas">
+        <item>General</item>
+        <item>Comunicación</item>
+        <item>Viabilidad</item>
+        <item>Creatividad</item>
     </string-array>
 
 
