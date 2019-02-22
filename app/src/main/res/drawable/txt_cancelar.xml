@@ -10,7 +10,7 @@
         android:right="1dp"
         android:bottom="1dp"/>
 
-    <corners android:radius="40dp"/>
+    <corners android:radius="20dp"/>
 
 
 
