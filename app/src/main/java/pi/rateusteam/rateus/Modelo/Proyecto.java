@@ -1,6 +1,5 @@
 package pi.rateusteam.rateus.Modelo;
 
-import android.net.Uri;
 
 public class Proyecto {
 

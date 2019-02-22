@@ -2,7 +2,6 @@ package pi.rateusteam.rateus.Fragments;
 
 import android.content.Context;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -10,14 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.view.KeyEvent;
 import android.widget.RatingBar;
 import android.widget.TextView;
-
-import com.google.android.gms.vision.text.Line;
 
 import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Controladores.GestorFirebase;
@@ -39,7 +34,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
     private GestorErrores gestorErrores;
 
     private TextView txtTitulo, txtDescripcion, txtVerEstadisticas;
-    private ImageView imgLogo;
+    private ImageView imgLogo, btnAjustes;
     private String votante;
     private RatingBar rbCreatividad, rbViabilidad, rbComunicacion;
     private Button btnVotar;
@@ -70,6 +65,9 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         txtVerEstadisticas.setOnClickListener(this);
 
         lVerEstadisticas = v.findViewById(R.id.lVerEstadisticas);
+
+        btnAjustes = v.findViewById(R.id.btnAjustes);
+        btnAjustes.setOnClickListener(this);
 
         btnVotar = v.findViewById(R.id.btnVotar);
         btnVotar.setOnClickListener(this);
@@ -135,6 +133,10 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
             case R.id.txtVerEstadisticas:
                 Intent i = new Intent(getContext(), GraficasActivity.class);
                 startActivityForResult(i, ACTIVITY_GRAFICAS);
+                break;
+            case R.id.btnAjustes:
+                AjustesDialog dialog = new AjustesDialog(getActivity());
+                dialog.show();
                 break;
         }
     }

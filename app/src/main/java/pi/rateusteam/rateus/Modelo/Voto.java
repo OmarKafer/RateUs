@@ -8,7 +8,7 @@ public class Voto {
     private String idVotante;
     private float mediaVoto;
 
-    public Voto(){};
+    public Voto(){}
 
     public Voto(float votoCreatividad, float votoViabilidad, float votoComunicacion, String idVotante) {
         this.votoCreatividad = votoCreatividad;
