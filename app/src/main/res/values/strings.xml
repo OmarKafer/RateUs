@@ -26,6 +26,10 @@
     <string name="errorCargarLogo">Ha habido un error al cargar el logo</string>
     <string name="QRUsado">Este QR ya ha votado el proyecto.</string>
     <string name="primeroGrafica">Primero:</string>
+    <string name="Configuracio">Configuración</string>
+    <string name="Preferencias">Preferencias</string>
+    <string name="EditarProyecto">Editar proyecto</string>
+    <string name="Cancelar"><b>Cancelar</b></string>
 
     <string-array name="ciclos">
         <item>@string/spinnerCiclo</item>

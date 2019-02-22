@@ -27,5 +27,10 @@
     <string name="errorCargarLogo">There was an error loading the logo</string>
     <string name="QRUsado">This QR has already voted the project.</string>
     <string name="primeroGrafica">First:</string>
+    <string name="Configuracio">Configuration</string>
+    <string name="Preferencias">Preferences</string>
+    <string name="EditarProyecto">Edit project</string>
+    <string name="Cancelar"><b>Cancel</b></string>
+
 
 </resources>
