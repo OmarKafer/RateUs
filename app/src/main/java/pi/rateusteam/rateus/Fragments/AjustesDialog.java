@@ -2,6 +2,7 @@ package pi.rateusteam.rateus.Fragments;
 
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.view.Window;
 import android.widget.TextView;
 
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
+import pi.rateusteam.rateus.Preferencias.PreferenciasActivity;
 import pi.rateusteam.rateus.R;
 
 public class AjustesDialog extends Dialog implements android.view.View.OnClickListener {
@@ -47,6 +49,8 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
                 break;
             case R.id.txtPreferencias:
                 Log.d("Omar", "Boton preferencias pulsado");
+                Intent i = new Intent(activity.getApplicationContext(), PreferenciasActivity.class);
+                activity.startActivityForResult(i, 1);
                 //dismiss();
                 break;
             case R.id.txtCancelar:
