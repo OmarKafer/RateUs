@@ -13,6 +13,7 @@ public class PreferenciasActivity extends PreferenceActivity implements SharedPr
 
 
     SharedPreferences preferenciasUsuario;
+    // Comentario para eliminar //
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
