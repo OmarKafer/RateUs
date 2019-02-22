@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -26,6 +25,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:padding="10dp"
             android:background="@drawable/txt_preferencias"
             android:text="@string/Preferencias"
             android:gravity="center"
@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:padding="10dp"
             android:background="@drawable/txt_editar"
             android:text="@string/EditarProyecto"
             android:gravity="center"
@@ -55,6 +56,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
+            android:padding="10dp"
             android:background="@drawable/txt_cancelar"
             android:text="@string/Cancelar"
             android:gravity="center"
