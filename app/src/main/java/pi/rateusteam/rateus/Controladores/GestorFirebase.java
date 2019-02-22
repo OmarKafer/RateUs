@@ -43,6 +43,7 @@ import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.Modelo.EntradaProyecto;
 import pi.rateusteam.rateus.Modelo.Proyecto;
 import pi.rateusteam.rateus.Modelo.Voto;
+import pi.rateusteam.rateus.R;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -105,7 +106,7 @@ public class GestorFirebase {
                             }
                             ((NavigationHost) activity).navigateTo(new VotacionFragment(), false);
                         } else {
-                            gestorErrores.mostrarError("ERROR: Usuario o clave incorrectos"); // PONER EN STRINGS
+                            gestorErrores.mostrarError(activity.getResources().getString(R.string.errorLogin));
                         }
                     }
                 });
@@ -124,7 +125,7 @@ public class GestorFirebase {
                             cargarAxisX();
                             ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
                         } else {
-                            gestorErrores.mostrarError("ERROR: No se ha podido crear el proyecto: " + task.getException()); // PONER EN STRINGS
+                            gestorErrores.mostrarError(activity.getResources().getString(R.string.errorCrearProyecto));
                         }
                     }
                 });
@@ -159,7 +160,7 @@ public class GestorFirebase {
                 databaseAux.child("mediaViabilidad").setValue(mediaViabilidadActual + v.getVotoViabilidad());
                 databaseAux.child("mediaComunicacion").setValue(mediaComunicacionActual + v.getVotoComunicacion());
                 databaseAux.child("mediaCreatividad").setValue(mediaCreatividadActual + v.getVotoCreatividad());
-                gestorErrores.mostrarMensaje("¡VOTO REGISTRADO!");  // PONER EN STRINGS
+                gestorErrores.mostrarMensaje(activity.getResources().getString(R.string.votoRegistrado));
             }
 
             @Override
@@ -203,7 +204,7 @@ public class GestorFirebase {
         mStorage.getDownloadUrl().addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                gestorErrores.mostrarError("Ha habido un error al cargar el logo"); // METER A STRINGS
+                gestorErrores.mostrarError(activity.getResources().getString(R.string.errorCargarLogo));
             }
         });
     }
@@ -221,7 +222,7 @@ public class GestorFirebase {
                 if (dataSnapshot.hasChildren()) {
                     // El voto de este usuario ya se ha registrado.
                     f.ventanaSinVotos();
-                    gestorErrores.mostrarError("Este QR ya ha votado el proyecto.");  // METER A STRINGS
+                    gestorErrores.mostrarError(activity.getResources().getString(R.string.QRUsado));
                 } else {
                     // El voto de este usuario no se ha registrado.
                     f.ventanaConVotos();
@@ -377,7 +378,7 @@ public class GestorFirebase {
                 EntradaProyecto ep = iterador.next();
                 //Log.d("Omar", "Proyecto: " + ep.getTitulo() + " Nota Media: " + ep.getMedia());
                 if(cont==0) {
-                    gestorGraficas.setTxtPrimero("Primero: " + ep.getTitulo()); // METER EN STRINGS
+                    gestorGraficas.setTxtPrimero(activity.getResources().getString(R.string.primeroGrafica) + ep.getTitulo());
                 }
                 entries.add(new BarEntry(5-cont, ep.getMedia(), ep.getTitulo()));
                 labels.add("");

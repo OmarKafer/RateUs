@@ -20,5 +20,12 @@
     <string name="txtCodigoQR"> QR code!</string>
     <string name="btnVotar">VOTE</string>
     <string name="spinnerCiclo">Choose a course</string>
+    <string name="errorLogin">ERROR: Incorrect username or password</string>
+    <string name="proyectoRegistrado">Project created! You can now log-in.</string>
+    <string name="errorCrearProyecto">ERROR: The project cannot be created:</string>
+    <string name="votoRegistrado">REGISTERED VOTE!</string>
+    <string name="errorCargarLogo">There was an error loading the logo</string>
+    <string name="QRUsado">This QR has already voted the project.</string>
+    <string name="primeroGrafica">First:</string>
 
 </resources>

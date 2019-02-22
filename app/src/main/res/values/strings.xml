@@ -19,6 +19,13 @@
     <string name="btnVotar">VOTAR</string>
     <string name="spinnerCiclo">Seleccione un ciclo</string>
     <string name="verEstadisticas"><u>Ver estadísticas</u></string>
+    <string name="errorLogin">ERROR: Usuario o clave incorrectos</string>
+    <string name="proyectoRegistrado">Proyecto creado! Ya puedes iniciar sesión.</string>
+    <string name="errorCrearProyecto">ERROR: No se ha podido crear el proyecto:</string>
+    <string name="votoRegistrado">¡VOTO REGISTRADO!</string>
+    <string name="errorCargarLogo">Ha habido un error al cargar el logo</string>
+    <string name="QRUsado">Este QR ya ha votado el proyecto.</string>
+    <string name="primeroGrafica">Primero:</string>
 
     <string-array name="ciclos">
         <item>@string/spinnerCiclo</item>

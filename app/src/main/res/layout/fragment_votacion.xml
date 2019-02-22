@@ -14,6 +14,22 @@
         android:orientation="vertical">
 
         <LinearLayout
+            android:id="@+id/lLogo"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.1"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/btnAjustes"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ajustes"
+                android:paddingLeft="10dp"
+                android:paddingTop="10dp"/>
+
+        </LinearLayout>
+        <LinearLayout
             android:id="@+id/lProyecto"
             android:layout_width="match_parent"
             android:layout_height="0dp"
@@ -182,12 +198,15 @@
 
             <TextView
                 android:id="@+id/txtVerEstadisticas"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="0dp"
                 android:layout_weight="2"
                 android:text="@string/verEstadisticas"
+                android:layout_gravity="center"
+                android:drawablePadding="5dp"
                 android:textSize="18dp"
                 android:gravity="center"/>
+
 
         </LinearLayout>
 
