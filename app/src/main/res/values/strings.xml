@@ -30,6 +30,9 @@
     <string name="Preferencias">Preferencias</string>
     <string name="EditarProyecto">Editar proyecto</string>
     <string name="Cancelar"><b>Cancelar</b></string>
+    <string name="pref">Preferencias</string>
+    <string name="pref_color">Color de la app</string>
+    <string name="background_por_defecto">Aplicar background por defecto</string>
 
     <string-array name="ciclos">
         <item>@string/spinnerCiclo</item>
@@ -52,8 +55,16 @@
         <item>Creatividad</item>
     </string-array>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string-array name="colores">
+        <item>Azul</item>
+        <item>Amarillo</item>
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Naranja</item>
+        <item>Blanco</item>
+        <item>Negro</item>
+        <item>Gris</item>
+    </string-array>
 
 
 </resources>

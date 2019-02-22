@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory android:title="@string/pref">
+
+        <ListPreference
+            android:defaultValue="1"
+            android:entries="@array/colores"
+            android:entryValues="@array/colores"
+            android:key="color_de_fondo"
+            android:summary="Cap"
+            android:title="@string/pref_color"/>
+
+        <CheckBoxPreference
+            android:id="@+id/aplicar_background"
+            android:defaultValue="false"
+            android:key="aplicar_background"
+            android:summary="No"
+            android:title="@string/background_por_defecto" />
+    </PreferenceCategory>
+</PreferenceScreen>
