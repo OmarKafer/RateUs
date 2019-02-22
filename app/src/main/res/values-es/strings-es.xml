@@ -30,5 +30,10 @@
     <string name="Preferencias">Preferencias</string>
     <string name="EditarProyecto">Editar proyecto</string>
     <string name="Cancelar"><b>Cancelar</b></string>
+    <string name="pref">Preferencias</string>
+    <string name="pref_color">Color de la app</string>
+    <string name="background_por_defecto">Aplicar background por defecto</string>
+
+
 
 </resources>
