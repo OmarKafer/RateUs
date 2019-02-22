@@ -12,7 +12,7 @@ import pi.rateusteam.rateus.R;
 public class PreferenciasActivity extends PreferenceActivity implements SharedPreferences.OnSharedPreferenceChangeListener{
 
 
-    SharedPreferences preferenciasUsuario;;
+    SharedPreferences preferenciasUsuario;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
