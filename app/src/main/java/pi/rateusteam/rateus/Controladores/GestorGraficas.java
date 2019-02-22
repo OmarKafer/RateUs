@@ -3,6 +3,7 @@ package pi.rateusteam.rateus.Controladores;
 import android.app.Activity;
 import android.graphics.Color;
 import android.util.Log;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -19,11 +20,17 @@ public class GestorGraficas {
     private HorizontalBarChart grafica;
     private GestorFirebase gestorFirebase;
     private String ciclo;
+    private TextView txtPrimero;
 
-    public GestorGraficas(HorizontalBarChart grafica, Activity activity, String ciclo) {
+    public GestorGraficas(HorizontalBarChart grafica, Activity activity, String ciclo, TextView txtPrimero) {
         this.grafica = grafica;
         gestorFirebase = new GestorFirebase(activity, this);
         this.ciclo = ciclo;
+        this.txtPrimero = txtPrimero;
+    }
+
+    public void setTxtPrimero(String txt) {
+        txtPrimero.setText(txt);
     }
 
     public String getCiclo() {

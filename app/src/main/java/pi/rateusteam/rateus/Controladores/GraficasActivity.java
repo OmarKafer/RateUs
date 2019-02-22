@@ -7,6 +7,7 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.HorizontalBarChart;
@@ -25,11 +26,14 @@ public class GraficasActivity extends AppCompatActivity {
 
     private GestorGraficas gestorGraficas;
     private Spinner spinnerCategoriaGraficas;
+    private TextView txtPrimero;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_graficas);
+
+        txtPrimero = findViewById(R.id.txtPrimero);
 
         spinnerCategoriaGraficas = findViewById(R.id.spinnerCategoriaGraficas);
         spinnerCategoriaGraficas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
@@ -45,7 +49,7 @@ public class GraficasActivity extends AppCompatActivity {
         });
 
         HorizontalBarChart grafica = (HorizontalBarChart) findViewById(R.id.grafica);
-        gestorGraficas = new GestorGraficas(grafica, this, spinnerCategoriaGraficas.getSelectedItem().toString());
+        gestorGraficas = new GestorGraficas(grafica, this, spinnerCategoriaGraficas.getSelectedItem().toString(), txtPrimero);
         gestorGraficas.initChart();
     }
 

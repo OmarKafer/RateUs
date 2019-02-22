@@ -34,11 +34,11 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private static final int ACTIVITY_LECTOR = 2;
     private static final int ACTIVITY_GRAFICAS = 3;
-    private LinearLayout lEscanear, lVotos, lBoton;
+    private LinearLayout lEscanear, lVotos, lBoton, lVerEstadisticas;
     private GestorFirebase gestorFirebase;
     private GestorErrores gestorErrores;
 
-    private TextView txtTitulo, txtDescripcion;
+    private TextView txtTitulo, txtDescripcion, txtVerEstadisticas;
     private ImageView imgLogo;
     private String votante;
     private RatingBar rbCreatividad, rbViabilidad, rbComunicacion;
@@ -65,7 +65,11 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         txtTitulo = v.findViewById(R.id.txtTitulo);
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
-        imgLogo.setOnClickListener(this);
+
+        txtVerEstadisticas = v.findViewById(R.id.txtVerEstadisticas);
+        txtVerEstadisticas.setOnClickListener(this);
+
+        lVerEstadisticas = v.findViewById(R.id.lVerEstadisticas);
 
         btnVotar = v.findViewById(R.id.btnVotar);
         btnVotar.setOnClickListener(this);
@@ -128,7 +132,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
                 votar();
                 ventanaSinVotos();
                 break;
-            case R.id.imgLogo:
+            case R.id.txtVerEstadisticas:
                 Intent i = new Intent(getContext(), GraficasActivity.class);
                 startActivityForResult(i, ACTIVITY_GRAFICAS);
                 break;
@@ -143,6 +147,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
     public void ventanaSinVotos() {
         permitirAtras = true;
         lEscanear.setVisibility(View.VISIBLE);
+        lVerEstadisticas.setVisibility(View.VISIBLE);
         lVotos.setVisibility(View.GONE);
         lBoton.setVisibility(View.GONE);
     }
@@ -153,6 +158,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         rbViabilidad.setRating((float)0);
         rbCreatividad.setRating((float)0);
         lEscanear.setVisibility(View.GONE);
+        lVerEstadisticas.setVisibility(View.GONE);
         lVotos.setVisibility(View.VISIBLE);
         lBoton.setVisibility(View.VISIBLE);
     }

@@ -256,9 +256,9 @@ public class GestorFirebase {
     }
 
     public void cargarGraficas(final HorizontalBarChart grafica, final String categoria) {
-        final ArrayList<BarEntry> entries = new ArrayList<>();
-        //final ArrayList<EntradaProyecto> proyectos = new ArrayList<>();
-        final ArrayList<String> labels = new ArrayList<>();
+        //final ArrayList<BarEntry> entries = new ArrayList<>();
+        final ArrayList<EntradaProyecto> proyectos = new ArrayList<>();
+        //final ArrayList<String> labels = new ArrayList<>();
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -286,19 +286,19 @@ public class GestorFirebase {
                     float mediaProyecto = sumaMedias/numVotos;
 
                     if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
-                        labels.add(i.child("titulo").getValue(String.class));
-                        entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
-                        //proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
+                        //labels.add(i.child("titulo").getValue(String.class));
+                        //entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
+                        proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
                     } else {
-                        labels.add("");
-                        entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
-                        //proyectos.add(new EntradaProyecto("", axisXProyecto, mediaProyecto));
+                        //labels.add("");
+                        //entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
+                        proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
                     }
 
                 }
 
-                //final ArrayList<BarEntry> entries = listarMejoresProyectos(proyectos);
-
+                final ArrayList<String> labels = new ArrayList<>();
+                final ArrayList<BarEntry> entries = listarMejoresProyectos(proyectos, labels);
                 // Animación de las barras
                 //grafica.animateXY(100, 100);
                 // Descripción de la gráfica
@@ -310,10 +310,12 @@ public class GestorFirebase {
                 // Deshabilitar el zoom
                 grafica.setScaleEnabled(false);
 
+
                 // Diseño del axis X
                 XAxis xAxis = grafica.getXAxis();
+                xAxis.setCenterAxisLabels(true);
                 xAxis.setDrawGridLines(false);
-                xAxis.setGranularity(0.7f);
+                xAxis.setGranularity(1f);
                 xAxis.setGranularityEnabled(true);
                 xAxis.setTextSize(40 - entries.size());
                 xAxis.setTextColor(Color.rgb(39, 45, 60));
@@ -353,7 +355,7 @@ public class GestorFirebase {
         });
     }
 
-    private ArrayList<BarEntry> listarMejoresProyectos(ArrayList<EntradaProyecto> proyectos) {
+    private ArrayList<BarEntry> listarMejoresProyectos(ArrayList<EntradaProyecto> proyectos, ArrayList<String> labels) {
         ArrayList<BarEntry> entries = new ArrayList<>();
         Collections.sort(proyectos, new Comparator<EntradaProyecto>() {
             @Override
@@ -373,11 +375,18 @@ public class GestorFirebase {
         while(iterador.hasNext()) {
             if(cont<5) {
                 EntradaProyecto ep = iterador.next();
-                entries.add(new BarEntry(cont, ep.getMedia()));
+                //Log.d("Omar", "Proyecto: " + ep.getTitulo() + " Nota Media: " + ep.getMedia());
+                if(cont==0) {
+                    gestorGraficas.setTxtPrimero("Primero: " + ep.getTitulo()); // METER EN STRINGS
+                }
+                entries.add(new BarEntry(5-cont, ep.getMedia(), ep.getTitulo()));
+                labels.add("");
+                cont++;
             } else {
                 break;
             }
         }
+        Collections.reverse(labels);
 
         return entries;
     }
