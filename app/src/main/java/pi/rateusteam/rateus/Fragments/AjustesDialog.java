@@ -49,8 +49,8 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
                 break;
             case R.id.txtCancelar:
                 Log.d("Omar", "Boton cancelar pulsado");
+                dismiss();
                 break;
         }
-        //dismiss();
     }
 }
