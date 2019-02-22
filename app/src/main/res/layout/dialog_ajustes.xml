@@ -13,12 +13,13 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="0.75"
+            android:layout_weight="1"
             android:background="@drawable/txt_dialog"
             android:text="@string/Configuracio"
             android:gravity="center"
             android:textSize="15dp"
-            android:textColor="#636363"/>
+            android:textColor="#636363"
+            android:padding="10dp"/>
 
         <TextView
             android:id="@+id/txtPreferencias"
