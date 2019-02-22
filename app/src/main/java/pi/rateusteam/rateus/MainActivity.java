@@ -1,6 +1,8 @@
 package pi.rateusteam.rateus;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
@@ -33,6 +35,11 @@ public class MainActivity extends AppCompatActivity implements NavigationHost {
                     .add(R.id.container, new LoginFragment())
                     .commit();
         }
+
+        /*GradientDrawable drawable = (GradientDrawable) getResources().getDrawable(R.drawable.background);
+
+        int[] colores = {Color.BLUE, Color.GREEN};
+        drawable.setColors(colores);*/
 
 
     }

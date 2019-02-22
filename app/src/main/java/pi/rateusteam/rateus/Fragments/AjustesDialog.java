@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
 
 public class AjustesDialog extends Dialog implements android.view.View.OnClickListener {
@@ -42,6 +43,7 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
             case R.id.txtEditar:
                 Log.d("Omar", "Boton editar pulsado");
                 //activity.finish();
+                ((NavigationHost) activity).navigateTo(new RegistroFragment(), true); // No se si True o False
                 break;
             case R.id.txtPreferencias:
                 Log.d("Omar", "Boton preferencias pulsado");
@@ -49,6 +51,10 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
                 break;
             case R.id.txtCancelar:
                 Log.d("Omar", "Boton cancelar pulsado");
+                dismiss();
+                break;
+            default:
+                Log.d("Omar", "Ningún boton pulsado");
                 dismiss();
                 break;
         }
