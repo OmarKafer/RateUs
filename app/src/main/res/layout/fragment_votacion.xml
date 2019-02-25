@@ -24,11 +24,12 @@
                 android:id="@+id/btnAjustes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ajustes"
                 android:paddingLeft="10dp"
-                android:paddingTop="10dp"/>
+                android:paddingTop="10dp"
+                android:src="@drawable/ajustes" />
 
         </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lProyecto"
             android:layout_width="match_parent"
@@ -41,8 +42,8 @@
                 android:layout_height="0dp"
                 android:layout_weight="1.5"
                 android:orientation="horizontal"
-                android:paddingRight="5dp"
-                android:paddingTop="5dp">
+                android:paddingTop="5dp"
+                android:paddingRight="5dp">
 
                 <TextView
                     android:id="@+id/txtTitulo"
@@ -50,7 +51,7 @@
                     android:layout_height="match_parent"
                     android:layout_weight="3"
                     android:gravity="center"
-                    android:textSize="30dp"/>
+                    android:textSize="30dp" />
 
                 <ImageView
                     android:id="@+id/imgLogo"
@@ -59,6 +60,7 @@
                     android:layout_weight="1" />
 
             </LinearLayout>
+
             <ScrollView
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
@@ -70,12 +72,12 @@
 
                     <TextView
                         android:id="@+id/txtDescripcion"
-                        android:padding="5dp"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:inputType="textMultiLine|text"
-                        android:textSize="18dp"
-                        android:maxLines="10" />
+                        android:maxLines="10"
+                        android:padding="5dp"
+                        android:textSize="18dp" />
 
                 </LinearLayout>
             </ScrollView>
@@ -182,10 +184,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_weight="2"
+                android:background="@drawable/btn_entrar"
                 android:text="@string/btnVotar"
                 android:textColor="#ffffff"
-                android:textSize="18dp"
-                android:background="@drawable/btn_entrar" />
+                android:textSize="18dp" />
 
         </LinearLayout>
 
@@ -200,12 +202,12 @@
                 android:id="@+id/txtVerEstadisticas"
                 android:layout_width="wrap_content"
                 android:layout_height="0dp"
-                android:layout_weight="2"
-                android:text="@string/verEstadisticas"
                 android:layout_gravity="center"
+                android:layout_weight="2"
                 android:drawablePadding="5dp"
-                android:textSize="18dp"
-                android:gravity="center"/>
+                android:gravity="center"
+                android:text="@string/verEstadisticas"
+                android:textSize="18dp" />
 
 
         </LinearLayout>

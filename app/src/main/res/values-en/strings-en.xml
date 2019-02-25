@@ -60,7 +60,7 @@
     <string name="btnCancelarRegistro">Cancel</string>
 
     //String fragment_votacion (Layout)
-    <string name="txtEscaneaTu">¡Sacan your</string>
+    <string name="txtEscaneaTu">¡Scan your</string>
     <string name="txtCodigoQR">QR code!</string>
     <string name="txtCreatividad">Creativity and innovation of the project</string>
     <string name="txtImplementacion">Possibilities of implementation and transferability</string>
