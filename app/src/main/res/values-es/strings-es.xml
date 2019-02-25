@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    //Strings activity_graficas (Layout)
+    <string-array name="ciclosGraficas">
+        <item>General</item>
+        <item>Comunicación</item>
+        <item>Viabilidad</item>
+        <item>Creatividad</item>
+    </string-array>
+
     <string name="app_name">RateUs</string>
     <string name="txtEmail">Email</string>
     <string name="txtContrasenya">Contraseña</string>
