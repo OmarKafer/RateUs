@@ -1,7 +1,9 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    //Strings activity_graficas (Layout)
+    //String nombreAPP
+    <string name="app_name">RateUs</string>
+
+    //Strings activity_graficas (array_ciclosGraficas)
     <string-array name="ciclosGraficas">
         <item>General</item>
         <item>Comunicación</item>
@@ -9,40 +11,102 @@
         <item>Creatividad</item>
     </string-array>
 
-    <string name="app_name">RateUs</string>
-    <string name="txtEmail">Email</string>
-    <string name="txtContrasenya">Contraseña</string>
-    <string name="txtTitulo">Título</string>
-    <string name="txtDescripcion">Descripción</string>
-    <string name="btnGuardar">Guardar</string>
-    <string name="btnCancelar">Cancelar</string>
-    <string name="btnEntrar">Entrar</string>
-    <string name="txtConfirmarContrasenya">Confirmar contraseña</string>
-    <string name="txtCrearProyecto">O CREAR PROYECTO</string>
-    <string name="btnRegistro">REGISTRAR</string>
-    <string name="txtCrearProyecto2">CREAR PROYECTO</string>
-    <string name="txtCreatividad">Creatividad e innovación del proyecto</string>
-    <string name="txtImplementacion">Posibilidades de implementación y transferibilidad</string>
-    <string name="txtComunicacion">Comunicación</string>
-    <string name="txtEscaneaTu">¡Escanea tu</string>
-    <string name="txtCodigoQR">código QR!</string>
-    <string name="btnVotar">VOTAR</string>
-    <string name="spinnerCiclo">Seleccione un ciclo</string>
-    <string name="errorLogin">ERROR: Usuario o clave incorrectos</string>
-    <string name="proyectoRegistrado">Proyecto creado! Ya puedes iniciar sesión.</string>
-    <string name="errorCrearProyecto">ERROR: No se ha podido crear el proyecto:</string>
-    <string name="votoRegistrado">¡VOTO REGISTRADO!</string>
-    <string name="errorCargarLogo">Ha habido un error al cargar el logo</string>
-    <string name="QRUsado">Este QR ya ha votado el proyecto.</string>
-    <string name="primeroGrafica">Primero:</string>
-    <string name="Configuracio">Configuración</string>
+    //String dialog_ajustes (Layout)
     <string name="Preferencias">Preferencias</string>
     <string name="EditarProyecto">Editar proyecto</string>
     <string name="Cancelar"><b>Cancelar</b></string>
+
+    //String fragment_editar (Layout)
+    <string name="txtCrearProyecto2">CREAR PROYECTO</string>
+    <string name="txtEmailEditar">Email</string>
+    <string name="txtContrasenyaEditar">Contraseña</string>
+    <string name="txtConfirmarContrasenyaEditar">Confirmar contraseña</string>
+    <string name="txtTituloEditar">Título</string>
+    <string name="txtDescripcionEditar">Descripción</string>
+    <string name="btnGuardarEditar">Guardar</string>
+    <string name="btnCancelarEditar">Cancelar</string>
+
+    //String fragment_editar (array_ciclos)
+    <string-array name="ciclos">
+        <item>@string/spinnerCiclo</item>
+        <item>EDI</item>
+        <item>DAM</item>
+        <item>DAW</item>
+        <item>Márketing y publicidad</item>
+        <item>Videojuegos</item>
+        <item>Robótica</item>
+        <item>TAFAD</item>
+        <item>ASIR</item>
+        <item>GVEC</item>
+        <item>Mecatrónica</item>
+    </string-array>
+
+
+    //String fragment_login (Layout)
+    <string name="txtEmailLogin">Email</string>
+    <string name="txtContrasenyaLogin">Contraseña</string>
+    <string name="btnEntrar">Entrar</string>
+    <string name="btnRegistro">REGISTRAR</string>
+    <string name="txtCrearProyectoLogin">O CREAR PROYECTO</string>
+
+    //String fragment_registro (Layout)
+    <string name="txtEmailRegistro">Email</string>
+    <string name="txtContrasenyaRegistro">Contraseña</string>
+    <string name="txtConfirmarContrasenyaRegistro">Confirmar contraseña</string>
+    <string name="txtTituloRegistro">Título</string>
+    <string name="txtDescripcionRegistro">Descripción</string>
+    <string name="txtCrearProyectoRegistro">O CREAR PROYECTO</string>
+    <string name="btnGuardarRegistro">Guardar</string>
+    <string name="btnCancelarRegistro">Cancelar</string>
+
+    //String fragment_votacion (Layout)
+    <string name="txtEscaneaTu">¡Escanea tu</string>
+    <string name="txtCodigoQR">código QR!</string>
+    <string name="txtCreatividad">Creatividad e innovación del proyecto</string>
+    <string name="txtImplementacion">Posibilidades de implementación y transferibilidad</string>
+    <string name="txtComunicacion">Comunicación</string>
+    <string name="btnVotar">VOTAR</string>
+    <string name="verEstadisticas"><u>Ver estadísticas</u></string>
+
+
+
+    //NO LO ENCUENTRO .--------------------------.
+    <string name="spinnerCiclo">Seleccione un ciclo</string>
+
+
+    //String GestorFireBase (Controlador)
+    <string name="errorLogin">ERROR: Usuario o clave incorrectos</string>
+    <string name="errorCrearProyecto">ERROR: No se ha podido crear el proyecto:</string>
+    <string name="proyectoRegistrado">Proyecto creado! Ya puedes iniciar sesión.</string>
+    <string name="votoRegistrado">¡VOTO REGISTRADO!</string>
+    <string name="errorCargarLogo">Ha habido un error al cargar el logo</string>
+    <string name="QRUsado">Este QR ya ha votado el proyecto.</string>
+
+
+    //String LectorActivity (Controlador)
+    <string name="qrNoValido">QR no válido</string>
+
+
+    <string name="primeroGrafica">Primero:</string>
+    <string name="Configuracio">Configuración</string>
+
+
+    //String preferencias (Layout)
     <string name="pref">Preferencias</string>
     <string name="pref_color">Color de la app</string>
     <string name="background_por_defecto">Aplicar background por defecto</string>
 
+    //String preferencias (arrayColores)
+    <string-array name="colores">
+        <item>Azul</item>
+        <item>Amarillo</item>
+        <item>Rojo</item>
+        <item>Verde</item>
+        <item>Naranja</item>
+        <item>Blanco</item>
+        <item>Negro</item>
+        <item>Gris</item>
+    </string-array>
 
 
 </resources>

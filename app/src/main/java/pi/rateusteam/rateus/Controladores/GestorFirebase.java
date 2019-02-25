@@ -105,7 +105,7 @@ public class GestorFirebase {
                         if (task.isSuccessful()) {
                             p.setIdUsuario(getIdUsuario());
                             guardarDatosProyecto(p, uri);
-                            gestorErrores.mostrarMensaje("Proyecto creado! Ya puedes iniciar sesión.");   // PONER EN STRINGS
+                            gestorErrores.mostrarMensaje(activity.getResources().getString((R.string.proyectoRegistrado)));
                             mAuth.signOut();
                             cargarAxisX();
                             ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
