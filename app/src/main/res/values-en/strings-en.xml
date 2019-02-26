@@ -12,7 +12,7 @@
     </string-array>
 
     //String dialog_ajustes (Layout)
-    <string name="Preferencias">Preferences</string>
+    <string name="cerrarSesion">Log out</string>
     <string name="EditarProyecto">Edit Project</string>
     <string name="Cancelar"><b>Cancel</b></string>
 

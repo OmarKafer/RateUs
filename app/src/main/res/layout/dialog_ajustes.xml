@@ -22,16 +22,16 @@
             android:padding="10dp"/>
 
         <TextView
-            android:id="@+id/txtPreferencias"
+            android:id="@+id/txtCerrarSesion"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1.5"
             android:padding="10dp"
             android:background="@drawable/txt_preferencias"
-            android:text="@string/Preferencias"
+            android:text="@string/cerrarSesion"
             android:gravity="center"
             android:textSize="25dp"
-            android:textColor="#717171"/>
+            android:textColor="#466aef"/>
 
         <TextView
             android:id="@+id/txtEditar"
