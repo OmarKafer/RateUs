@@ -43,6 +43,28 @@
 
             </LinearLayout>
 
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="2">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:id="@+id/txtDescripcionEditar"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:inputType="textMultiLine|text"
+                        android:maxLines="10"
+                        android:padding="5dp"
+                        android:textSize="18dp" />
+
+                </LinearLayout>
+            </ScrollView>
+
+
         </LinearLayout>
 
         <LinearLayout
