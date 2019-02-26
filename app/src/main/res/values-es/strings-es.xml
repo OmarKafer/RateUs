@@ -41,6 +41,7 @@
         <item>Mecatrónica</item>
     </string-array>
 
+    <string name="txtEditarProyecto">Editar proyecto</string>
 
     //String fragment_login (Layout)
     <string name="txtEmailLogin">Email</string>

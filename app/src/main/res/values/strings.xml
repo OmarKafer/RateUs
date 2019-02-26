@@ -86,6 +86,7 @@
 
     //String LectorActivity (Controlador)
     <string name="qrNoValido">QR no válido</string>
+    <string name="txtEditarProyecto">Editar proyecto</string>
 
 
 
