@@ -31,7 +31,7 @@
             android:text="@string/Preferencias"
             android:gravity="center"
             android:textSize="25dp"
-            android:textColor="#466aef"/>
+            android:textColor="#717171"/>
 
         <TextView
             android:id="@+id/txtEditar"
