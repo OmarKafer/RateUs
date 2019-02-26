@@ -208,7 +208,7 @@
                             android:paddingRight="30dp">
 
                             <Button
-                                android:id="@+id/btnGuardar"
+                                android:id="@+id/btnGuardarEditar"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginRight="5dp"
@@ -218,7 +218,7 @@
                                 android:textColor="#FFFFFF" />
 
                             <Button
-                                android:id="@+id/btnCancelar"
+                                android:id="@+id/btnCancelarEditar"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"
