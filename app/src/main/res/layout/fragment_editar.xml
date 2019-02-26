@@ -237,7 +237,39 @@
                             android:visibility="invisible" />
 
                     </LinearLayout>
+
                 </ScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="2"
+                    android:gravity="center"
+                    android:orientation="horizontal"
+                    android:paddingLeft="30dp"
+                    android:paddingRight="30dp">
+
+                    <Button
+                        android:id="@+id/btnGuardar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_entrar"
+                        android:text="@string/btnGuardarRegistro"
+                        android:textColor="#FFFFFF" />
+
+                    <Button
+                        android:id="@+id/btnCancelar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:layout_weight="1"
+                        android:background="@drawable/btn_entrar"
+                        android:text="@string/btnCancelarRegistro"
+                        android:textColor="#FFFFFF" />
+
+                </LinearLayout>
 
             </LinearLayout>
 
