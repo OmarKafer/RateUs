@@ -102,10 +102,10 @@ public class RegistroFragment extends Fragment implements View.OnClickListener {
                         gestorFirebase.registrarUsuario(txtEmail.getText().toString(), txtContrasenya.getText().toString(), p, uri);
                     } else {
                         // Contraseñas no coinciden
-                        gestorErrores.mostrarError("ERROR: Las contraseñas no coinciden"); // PONER EN STRINGS
+                        gestorErrores.mostrarError(getActivity().getResources().getString(R.string.errorContrasenyas)); // PONER EN STRINGS
                     }
                 } else {
-                    gestorErrores.mostrarError("ERROR: Compruebe los campos"); // PONER EN STRINGS
+                    gestorErrores.mostrarError(getActivity().getResources().getString(R.string.errorCampos)); // PONER EN STRINGS
                 }
                 break;
             case R.id.btnCancelar:

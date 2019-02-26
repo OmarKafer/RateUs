@@ -128,6 +128,13 @@ public class GestorFirebase {
         });
     }
 
+    public void editarProyecto(String titulo, String descripcion, String ciclo) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
+        database.child("titulo").setValue(titulo);
+        database.child("descripcion").setValue(descripcion);
+        database.child("ciclo").setValue(ciclo);
+    }
+
     public void anyadirVoto(final Voto v) {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
         database.addListenerForSingleValueEvent(new ValueEventListener() {
