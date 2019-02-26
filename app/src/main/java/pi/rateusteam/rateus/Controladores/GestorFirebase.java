@@ -320,7 +320,7 @@ public class GestorFirebase {
                 leftYAxis.setLabelCount(5);
 
                 // Asignamos los datos de las entradas al dataset
-                BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados");
+                BarDataSet dataset = new BarDataSet(entries, "Proyectos Integrados"); // Poner en STRINGS
                 dataset.setColors(ColorTemplate.LIBERTY_COLORS);
                 dataset.setDrawValues(false);
 

@@ -45,13 +45,14 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
             case R.id.txtEditar:
                 Log.d("Omar", "Boton editar pulsado");
                 //activity.finish();
-                ((NavigationHost) activity).navigateTo(new RegistroFragment(), true); // No se si True o False
+                dismiss();
+                ((NavigationHost) activity).navigateTo(new EditarFragment(), true); // No se si True o False
                 break;
             case R.id.txtPreferencias:
                 Log.d("Omar", "Boton preferencias pulsado");
                 Intent i = new Intent(activity.getApplicationContext(), PreferenciasActivity.class);
                 activity.startActivityForResult(i, 1);
-                //dismiss();
+                dismiss();
                 break;
             case R.id.txtCancelar:
                 Log.d("Omar", "Boton cancelar pulsado");
