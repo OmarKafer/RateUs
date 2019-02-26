@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Window;
 import android.widget.TextView;
 
+import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.Preferencias.PreferenciasActivity;
 import pi.rateusteam.rateus.R;
@@ -17,7 +18,9 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
 
     public Activity activity;
     public Dialog d;
-    public TextView txtEditar, txtPreferencias, txtCancelar;
+    public TextView txtEditar, txtCerrarSesion, txtCancelar;
+
+    private GestorFirebase gestorFirebase;
 
     public AjustesDialog(Activity activity) {
         super(activity);
@@ -31,11 +34,13 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.dialog_ajustes);
         txtEditar = (TextView) findViewById(R.id.txtEditar);
-        txtPreferencias = (TextView) findViewById(R.id.txtPreferencias);
+        txtCerrarSesion = (TextView) findViewById(R.id.txtCerrarSesion);
         txtCancelar = (TextView) findViewById(R.id.txtCancelar);
         txtEditar.setOnClickListener(this);
-        txtPreferencias.setOnClickListener(this);
+        txtCerrarSesion.setOnClickListener(this);
         txtCancelar.setOnClickListener(this);
+
+        gestorFirebase = new GestorFirebase(activity);
 
     }
 
@@ -48,10 +53,10 @@ public class AjustesDialog extends Dialog implements android.view.View.OnClickLi
                 dismiss();
                 ((NavigationHost) activity).navigateTo(new EditarFragment(), true); // No se si True o False
                 break;
-            case R.id.txtPreferencias:
+            case R.id.txtCerrarSesion:
                 Log.d("Omar", "Boton preferencias pulsado");
-                Intent i = new Intent(activity.getApplicationContext(), PreferenciasActivity.class);
-                activity.startActivityForResult(i, 1);
+                gestorFirebase.cerrarSesion();
+                ((NavigationHost) activity).navigateTo(new LoginFragment(), false);
                 dismiss();
                 break;
             case R.id.txtCancelar:

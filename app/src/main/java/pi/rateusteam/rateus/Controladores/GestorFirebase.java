@@ -135,6 +135,10 @@ public class GestorFirebase {
         database.child("ciclo").setValue(ciclo);
     }
 
+    public void cerrarSesion() {
+        mAuth.signOut();
+    }
+
     public void anyadirVoto(final Voto v) {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos").child(getIdUsuario());
         database.addListenerForSingleValueEvent(new ValueEventListener() {
