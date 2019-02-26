@@ -102,7 +102,7 @@
                         android:background="#28ffffff"
                         android:drawablePadding="5dp"
                         android:drawableRight="@android:drawable/ic_dialog_email"
-                        android:hint="@string/txtEmail"
+                        android:hint="@string/txtEmailEditar"
                         android:inputType="textEmailAddress"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -124,7 +124,7 @@
                         android:layout_weight="2"
                         android:background="#28ffffff"
                         android:drawableRight="@android:drawable/ic_lock_idle_lock"
-                        android:hint="@string/txtContrasenya"
+                        android:hint="@string/txtContrasenyaEditar"
                         android:inputType="textPassword"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -146,7 +146,7 @@
                         android:layout_weight="2"
                         android:background="#28ffffff"
                         android:drawableRight="@android:drawable/ic_lock_idle_lock"
-                        android:hint="@string/txtConfirmarContrasenya"
+                        android:hint="@string/txtConfirmarContrasenyaEditar"
                         android:inputType="textPassword"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -170,7 +170,7 @@
                         android:background="#28ffffff"
                         android:focusable="true"
                         android:focusableInTouchMode="true"
-                        android:hint="@string/txtTitulo"
+                        android:hint="@string/txtTituloEditar"
                         android:inputType="textPersonName"
                         android:paddingLeft="10dp"
                         android:paddingRight="10dp"
@@ -194,7 +194,7 @@
                         android:focusable="true"
                         android:focusableInTouchMode="true"
                         android:gravity="top|left"
-                        android:hint="@string/txtDescripcion"
+                        android:hint="@string/txtDescripcionEditar"
                         android:inputType="textMultiLine|text"
                         android:maxLines="10"
                         android:paddingLeft="10dp"
@@ -226,7 +226,7 @@
                             android:layout_marginRight="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/btn_entrar"
-                            android:text="@string/btnGuardar"
+                            android:text="@string/btnGuardarEditar"
                             android:textColor="#FFFFFF" />
 
                         <Button
@@ -236,7 +236,7 @@
                             android:layout_marginLeft="5dp"
                             android:layout_weight="1"
                             android:background="@drawable/btn_entrar"
-                            android:text="@string/btnCancelar"
+                            android:text="@string/btnCancelarEditar"
                             android:textColor="#FFFFFF" />
 
                     </LinearLayout>

@@ -36,7 +36,7 @@
             android:drawableLeft="@android:drawable/ic_dialog_email"
             android:drawablePadding="10dp"
             android:background="#28ffffff"
-            android:hint="@string/txtEmail"
+            android:hint="@string/txtEmailLogin"
             android:inputType="textEmailAddress"
             android:paddingLeft="8dp"
             android:textSize="20dp"
@@ -60,7 +60,7 @@
             android:drawableLeft="@android:drawable/ic_lock_idle_lock"
             android:background="#28ffffff"
             android:textSize="20dp"
-            android:hint="@string/txtContrasenya"
+            android:hint="@string/txtContrasenyaLogin"
             android:inputType="textPassword"
             android:text=""
             android:paddingLeft="8dp"
@@ -107,7 +107,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
                 android:gravity="center"
-                android:text="@string/txtCrearProyecto"
+                android:text="@string/txtCrearProyectoLogin"
                 android:textColor="#FFFFFF"
                 android:textSize="15dp" />
 

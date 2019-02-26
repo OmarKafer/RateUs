@@ -1,39 +1,113 @@
-<?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    //String nombreAPP
     <string name="app_name">RateUs</string>
-    <string name="txtEmail">E-mail</string>
-    <string name="txtContrasenya">Password</string>
-    <string name="txtTitulo">Title</string>
-    <string name="txtDescripcion">Description</string>
-    <string name="btnGuardar">Save</string>
-    <string name="btnCancelar">Cancel</string>
-    <string name="btnEntrar">SIGN IN</string>
-    <string name="txtConfirmarContrasenya">Confirm password</string>
-    <string name="txtCrearProyecto">OR CREATE PROJECT</string>
-    <string name="btnRegistro">SIGN UP</string>
+
+    //Strings activity_graficas (array_ciclosGraficas)
+    <string-array name="ciclosGraficas">
+        <item>General</item>
+        <item>Comunication</item>
+        <item>Viability</item>
+        <item>Creativity</item>
+    </string-array>
+
+    //String dialog_ajustes (Layout)
+    <string name="Preferencias">Preferences</string>
+    <string name="EditarProyecto">Edit Project</string>
+    <string name="Cancelar"><b>Cancel</b></string>
+
+    //String fragment_editar (Layout)
     <string name="txtCrearProyecto2">CREATE PROJECT</string>
+    <string name="txtEmailEditar">E-mail</string>
+    <string name="txtContrasenyaEditar">Password</string>
+    <string name="txtConfirmarContrasenyaEditar">Confirm Password</string>
+    <string name="txtTituloEditar">Title</string>
+    <string name="txtDescripcionEditar">Description</string>
+    <string name="btnGuardarEditar">Save</string>
+    <string name="btnCancelarEditar">Cancel</string>
+
+    //String fragment_editar (array_ciclos)
+    <string-array name="ciclos">
+        <item>@string/spinnerCiclo</item>
+        <item>EDI</item>
+        <item>DAM</item>
+        <item>DAW</item>
+        <item>Márketing y publicidad</item>
+        <item>Videojuegos</item>
+        <item>Robótica</item>
+        <item>TAFAD</item>
+        <item>ASIR</item>
+        <item>GVEC</item>
+        <item>Mecatrónica</item>
+    </string-array>
+
+
+    //String fragment_login (Layout)
+    <string name="txtEmailLogin">E-mail</string>
+    <string name="txtContrasenyaLogin">Password</string>
+    <string name="btnEntrar">Enter</string>
+    <string name="btnRegistro">REGISTER</string>
+    <string name="txtCrearProyectoLogin">OR CREATE PROJECT</string>
+
+    //String fragment_registro (Layout)
+    <string name="txtEmailRegistro">E-mail</string>
+    <string name="txtContrasenyaRegistro">Password</string>
+    <string name="txtConfirmarContrasenyaRegistro">Conform Password</string>
+    <string name="txtTituloRegistro">Title</string>
+    <string name="txtDescripcionRegistro">Description</string>
+    <string name="txtCrearProyectoRegistro">OR CREATE PROJECT</string>
+    <string name="btnGuardarRegistro">SAVE</string>
+    <string name="btnCancelarRegistro">Cancel</string>
+
+    //String fragment_votacion (Layout)
+    <string name="txtEscaneaTu">¡Scan your</string>
+    <string name="txtCodigoQR">QR code!</string>
     <string name="txtCreatividad">Creativity and innovation of the project</string>
     <string name="txtImplementacion">Possibilities of implementation and transferability</string>
-    <string name="txtComunicacion">Communication</string>
-    <string name="txtEscaneaTu">Scan your</string>
-    <string name="txtCodigoQR"> QR code!</string>
+    <string name="txtComunicacion">Comunication</string>
     <string name="btnVotar">VOTE</string>
-    <string name="spinnerCiclo">Choose a course</string>
+    <string name="verEstadisticas"><u>View statistics</u></string>
+
+
+
+    //NO LO ENCUENTRO .--------------------------.
+    <string name="spinnerCiclo">Seleccione un ciclo</string>
+    <string name="primeroGrafica">First:</string>
+
+
+    //String GestorFireBase (Controlador)
     <string name="errorLogin">ERROR: Incorrect username or password</string>
-    <string name="proyectoRegistrado">Project created! You can now log-in.</string>
-    <string name="errorCrearProyecto">ERROR: The project cannot be created:</string>
+    <string name="errorCrearProyecto">ERROR: The project could not be created:</string>
+    <string name="proyectoRegistrado">Project created! You can now log in.</string>
     <string name="votoRegistrado">REGISTERED VOTE!</string>
     <string name="errorCargarLogo">There was an error loading the logo</string>
     <string name="QRUsado">This QR has already voted the project.</string>
-    <string name="primeroGrafica">First:</string>
-    <string name="Configuracio">Configuration</string>
-    <string name="Preferencias">Preferences</string>
-    <string name="EditarProyecto">Edit project</string>
-    <string name="Cancelar"><b>Cancel</b></string>
+
+
+    //String LectorActivity (Controlador)
+    <string name="qrNoValido">Invalid QR</string>
+
+
+
+    <string name="Configuracio">Settings</string>
+
+
+    //String preferencias (Layout)
     <string name="pref">Preferences</string>
     <string name="pref_color">Color of the app</string>
-    <string name="background_por_defecto">Apply default background</string>
+    <string name="background_por_defecto">Apply background by default</string>
+
+    //String preferencias (arrayColores)
+    <string-array name="colores">
+        <item>Blue</item>
+        <item>Yellow</item>
+        <item>Red</item>
+        <item>Green</item>
+        <item>Orange</item>
+        <item>White</item>
+        <item>Black</item>
+        <item>Grey</item>
+    </string-array>
 
 
 </resources>
