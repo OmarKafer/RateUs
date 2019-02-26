@@ -89,6 +89,9 @@
     <string name="txtEditarProyecto">Editar proyecto</string>
 
 
+    <string name="errorCampos">ERROR: Compruebe los campos</string>
+    <string name="errorContrasenyas">ERROR: Las contraseñas no coinciden</string>
+
 
     <string name="Configuracio">Configuración</string>
 

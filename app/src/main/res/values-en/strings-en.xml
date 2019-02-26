@@ -111,7 +111,7 @@
 
 
 
-    <string name="errorCampos">ERROR: Compruebe los campos</string>
-    <string name="errorContrasenyas">ERROR: Las contraseñas no coinciden</string>
+    <string name="errorCampos">ERROR: Check the fields</string>
+    <string name="errorContrasenyas">ERROR: Passwords do not match</string>
 
 </resources>
