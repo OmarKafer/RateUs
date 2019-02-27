@@ -5,7 +5,10 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.util.Log;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
@@ -48,8 +51,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 public class GestorFirebase {
-
-
 
     private FirebaseAuth mAuth;
     private Activity activity;
@@ -119,6 +120,10 @@ public class GestorFirebase {
     public void guardarDatosProyecto(Proyecto p, Uri uri) {
         DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
         database.child(getIdUsuario()).setValue(p);
+        guardarLogoProyecto(uri);
+    }
+
+    public void guardarLogoProyecto(Uri uri) {
         StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("logos").child(getIdUsuario());
         mStorage.putFile(uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
@@ -177,6 +182,34 @@ public class GestorFirebase {
                     txtTitulo.setText(p.getTitulo());
                     txtDescripcion.setText(p.getDescripcion());
                     recuperarLogoProyecto(imgLogo);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
+    public void recuperarProyectoTxt(final EditText txtTituloEditar, final EditText txtDescripcionEditar, final Spinner spinnerCiclo) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        Query q = database.orderByChild("idUsuario").equalTo(getIdUsuario());
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    Proyecto p = i.getValue(Proyecto.class);
+                    txtTituloEditar.setText(p.getTitulo());
+                    txtDescripcionEditar.setText(p.getDescripcion());
+
+                    ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(activity.getApplicationContext(), R.array.arrayCiclos, android.R.layout.simple_spinner_item);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerCiclo.setAdapter(adapter);
+                    if (p.getCiclo() != null) {
+                        int spinnerPosition = adapter.getPosition(p.getCiclo());
+                        spinnerCiclo.setSelection(spinnerPosition);
+                    }
                 }
             }
 

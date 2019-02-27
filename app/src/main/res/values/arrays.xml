@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
     <resources>
-        <string-array name="ciclos">
+        <string-array name="arrayCiclos">
             <item>@string/spinnerCiclo</item>
             <item>EDI</item>
             <item>DAM</item>

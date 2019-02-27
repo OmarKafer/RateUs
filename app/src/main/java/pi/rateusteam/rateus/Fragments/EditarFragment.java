@@ -5,6 +5,9 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +24,7 @@ import pi.rateusteam.rateus.R;
 
 import static android.app.Activity.RESULT_OK;
 
-public class EditarFragment extends Fragment implements View.OnClickListener {
+public class EditarFragment extends Fragment implements View.OnClickListener, TextWatcher {
 
     private TextView txtTitulo, txtDescripcion;
     private ImageView imgLogo;
@@ -31,7 +34,7 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
     private Button btnCancelar, btnGuardar;
 
     private GestorFirebase gestorFirebase;
-
+    private boolean imgCambiada;
 
     private static final int ACTIVITY_IMAGEN = 1;
 
@@ -57,7 +60,7 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
         txtTitulo = v.findViewById(R.id.txtTitulo);
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
-        //imgLogo.setOnClickListener(this);
+        imgLogo.setOnClickListener(this);
         txtTituloEditar = v.findViewById(R.id.txtTituloEditar);
         txtDescripcionEditar = v.findViewById(R.id.txtDescripcionEditar);
         spinnerCiclo = v.findViewById(R.id.spinnerCiclo);
@@ -66,6 +69,11 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
         btnCancelar = v.findViewById(R.id.btnCancelarEditar);
         btnCancelar.setOnClickListener(this);
         gestorFirebase = new GestorFirebase(getActivity());
+
+        txtTituloEditar.addTextChangedListener(this);
+        txtDescripcionEditar.addTextChangedListener(this);
+
+        imgCambiada = false;
 
         cargarDatosProyecto();
         return v;
@@ -83,10 +91,7 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
 
     private void cargarDatosProyecto() {
         gestorFirebase.recuperarProyecto(txtTitulo, txtDescripcion, imgLogo);
-        for (int i=0; i<20; i++) {
-            txtTituloEditar.setText(txtTitulo.getText().toString());
-            txtDescripcionEditar.setText(txtDescripcion.getText().toString());
-        }
+        gestorFirebase.recuperarProyectoTxt(txtTituloEditar, txtDescripcionEditar, spinnerCiclo);
     }
 
     private void abrirGaleria() {
@@ -105,6 +110,15 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
             case R.id.btnGuardarEditar:
                 if (comprobarCampos()) {
                     gestorFirebase.editarProyecto(txtTituloEditar.getText().toString(), txtDescripcionEditar.getText().toString(), spinnerCiclo.getSelectedItem().toString());
+                    if(imgCambiada) {
+                        gestorFirebase.guardarLogoProyecto(uri);
+                        try {
+                            wait(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                    ((NavigationHost) getActivity()).navigateTo(new VotacionFragment(), false);
                 }
                 break;
             case R.id.btnCancelarEditar:
@@ -139,8 +153,25 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
             case ACTIVITY_IMAGEN:
                 if(resultCode == RESULT_OK) {
                     cargarImagen(data);
+                    imgCambiada = true;
                 }
                 break;
         }
+    }
+
+    @Override
+    public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+        // Listener VACÍO (NO BORRAR)
+    }
+
+    @Override
+    public void onTextChanged(CharSequence s, int start, int before, int count) {
+        txtTitulo.setText(txtTituloEditar.getText().toString());
+        txtDescripcion.setText(txtDescripcionEditar.getText().toString());
+    }
+
+    @Override
+    public void afterTextChanged(Editable s) {
+        // Listener VACÍO (NO BORRAR)
     }
 }
