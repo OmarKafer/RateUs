@@ -57,7 +57,7 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
         txtTitulo = v.findViewById(R.id.txtTitulo);
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
-        imgLogo.setOnClickListener(this);
+        //imgLogo.setOnClickListener(this);
         txtTituloEditar = v.findViewById(R.id.txtTituloEditar);
         txtDescripcionEditar = v.findViewById(R.id.txtDescripcionEditar);
         spinnerCiclo = v.findViewById(R.id.spinnerCiclo);
@@ -65,7 +65,6 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
         btnGuardar.setOnClickListener(this);
         btnCancelar = v.findViewById(R.id.btnCancelarEditar);
         btnCancelar.setOnClickListener(this);
-
         gestorFirebase = new GestorFirebase(getActivity());
 
         cargarDatosProyecto();
@@ -84,8 +83,10 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
 
     private void cargarDatosProyecto() {
         gestorFirebase.recuperarProyecto(txtTitulo, txtDescripcion, imgLogo);
-        txtTituloEditar.setText(txtTitulo.getText().toString());
-        txtDescripcionEditar.setText(txtDescripcion.getText().toString());
+        for (int i=0; i<20; i++) {
+            txtTituloEditar.setText(txtTitulo.getText().toString());
+            txtDescripcionEditar.setText(txtDescripcion.getText().toString());
+        }
     }
 
     private void abrirGaleria() {
@@ -101,12 +102,12 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
             case R.id.imgLogo:
                 abrirGaleria();
                 break;
-            case R.id.btnGuardar:
+            case R.id.btnGuardarEditar:
                 if (comprobarCampos()) {
                     gestorFirebase.editarProyecto(txtTituloEditar.getText().toString(), txtDescripcionEditar.getText().toString(), spinnerCiclo.getSelectedItem().toString());
                 }
                 break;
-            case R.id.btnCancelar:
+            case R.id.btnCancelarEditar:
                 ((NavigationHost) getActivity()).navigateTo(new VotacionFragment(), false);
                 break;
         }
@@ -115,7 +116,6 @@ public class EditarFragment extends Fragment implements View.OnClickListener {
     private boolean comprobarCampos() {
         if(txtTituloEditar.getText().toString().compareToIgnoreCase("") == 0
                 || txtDescripcionEditar.getText().toString().compareToIgnoreCase("") == 0
-                || uri == null
                 || spinnerCiclo.getSelectedItem().toString().compareToIgnoreCase(getResources().getString(R.string.spinnerCiclo)) == 0) {
             return false;
         } else {

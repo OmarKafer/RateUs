@@ -282,16 +282,17 @@ public class GestorFirebase {
                     int axisXProyecto = i.child("axisXProyecto").getValue(Integer.class);
                     float mediaProyecto = sumaMedias/numVotos;
 
-                    if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
-                        //labels.add(i.child("titulo").getValue(String.class));
-                        //entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
-                        proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
-                    } else {
-                        //labels.add("");
-                        //entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
-                        proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
+                    if(numVotos > 15) {
+                        if(idProyecto.compareToIgnoreCase(getIdUsuario()) == 0) {
+                            //labels.add(i.child("titulo").getValue(String.class));
+                            //entries.add(new BarEntry(axisXProyecto, mediaProyecto, i.child("titulo").getValue(String.class)));
+                            proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
+                        } else {
+                            //labels.add("");
+                            //entries.add(new BarEntry(axisXProyecto, mediaProyecto, ""));
+                            proyectos.add(new EntradaProyecto(i.child("titulo").getValue(String.class), axisXProyecto, mediaProyecto));
+                        }
                     }
-
                 }
 
                 final ArrayList<String> labels = new ArrayList<>();
