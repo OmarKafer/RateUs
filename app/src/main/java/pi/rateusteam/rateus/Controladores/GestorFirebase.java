@@ -228,7 +228,7 @@ public class GestorFirebase {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 for(DataSnapshot i: dataSnapshot.getChildren()) {
                     Proyecto p = i.getValue(Proyecto.class);
-                    txtNumVeces.setText(p.getNumVotos() + activity.getResources().getString(R.string.numVeces));
+                    txtNumVeces.setText(p.getNumVotos() + " " + activity.getResources().getString(R.string.numVeces));
                 }
             }
 
