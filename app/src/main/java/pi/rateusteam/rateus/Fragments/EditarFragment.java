@@ -1,10 +1,12 @@
 package pi.rateusteam.rateus.Fragments;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AlertDialog;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import pi.rateusteam.rateus.Controladores.GestorErrores;
 import pi.rateusteam.rateus.Controladores.GestorFirebase;
 import pi.rateusteam.rateus.Interfaces.NavigationHost;
 import pi.rateusteam.rateus.R;
@@ -34,6 +37,7 @@ public class EditarFragment extends Fragment implements View.OnClickListener, Te
     private Button btnCancelar, btnGuardar;
 
     private GestorFirebase gestorFirebase;
+    private GestorErrores gestorErrores;
     private boolean imgCambiada;
 
     private static final int ACTIVITY_IMAGEN = 1;
@@ -68,7 +72,9 @@ public class EditarFragment extends Fragment implements View.OnClickListener, Te
         btnGuardar.setOnClickListener(this);
         btnCancelar = v.findViewById(R.id.btnCancelarEditar);
         btnCancelar.setOnClickListener(this);
+
         gestorFirebase = new GestorFirebase(getActivity());
+        gestorErrores = new GestorErrores(getActivity().getApplicationContext());
 
         txtTituloEditar.addTextChangedListener(this);
         txtDescripcionEditar.addTextChangedListener(this);
@@ -112,13 +118,11 @@ public class EditarFragment extends Fragment implements View.OnClickListener, Te
                     gestorFirebase.editarProyecto(txtTituloEditar.getText().toString(), txtDescripcionEditar.getText().toString(), spinnerCiclo.getSelectedItem().toString());
                     if(imgCambiada) {
                         gestorFirebase.guardarLogoProyecto(uri);
-                        try {
-                            wait(1000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        gestorErrores.mostrarDialog(getResources().getString(R.string.dialogReiniciar), getContext());
                     }
                     ((NavigationHost) getActivity()).navigateTo(new VotacionFragment(), false);
+                } else {
+                    gestorErrores.mostrarError(getResources().getString(R.string.errorCampos));
                 }
                 break;
             case R.id.btnCancelarEditar:

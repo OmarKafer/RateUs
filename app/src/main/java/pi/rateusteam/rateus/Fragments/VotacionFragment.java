@@ -30,11 +30,11 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private static final int ACTIVITY_LECTOR = 2;
     private static final int ACTIVITY_GRAFICAS = 3;
-    private LinearLayout lEscanear, lVotos, lBoton, lVerEstadisticas;
+    private LinearLayout lEscanear, lVotos, lBoton, lVerEstadisticas, lNumVotos;
     private GestorFirebase gestorFirebase;
     private GestorErrores gestorErrores;
 
-    private TextView txtTitulo, txtDescripcion, txtVerEstadisticas;
+    private TextView txtTitulo, txtDescripcion, txtVerEstadisticas, txtNumVeces;
     private ImageView imgLogo, btnAjustes;
     private String votante;
     private RatingBar rbCreatividad, rbViabilidad, rbComunicacion;
@@ -62,10 +62,14 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         txtDescripcion = v.findViewById(R.id.txtDescripcion);
         imgLogo = v.findViewById(R.id.imgLogo);
 
+        txtNumVeces = v.findViewById(R.id.txtNumVeces);
+
         txtVerEstadisticas = v.findViewById(R.id.txtVerEstadisticas);
         txtVerEstadisticas.setOnClickListener(this);
 
         lVerEstadisticas = v.findViewById(R.id.lVerEstadisticas);
+
+        lNumVotos = v.findViewById(R.id.lNumVotos);
 
         btnAjustes = v.findViewById(R.id.btnAjustes);
         btnAjustes.setOnClickListener(this);
@@ -153,6 +157,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         permitirAtras = true;
         lEscanear.setVisibility(View.VISIBLE);
         lVerEstadisticas.setVisibility(View.VISIBLE);
+        lNumVotos.setVisibility(View.VISIBLE);
         lVotos.setVisibility(View.GONE);
         lBoton.setVisibility(View.GONE);
     }
@@ -164,6 +169,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
         rbCreatividad.setRating((float)0);
         lEscanear.setVisibility(View.GONE);
         lVerEstadisticas.setVisibility(View.GONE);
+        lNumVotos.setVisibility(View.GONE);
         lVotos.setVisibility(View.VISIBLE);
         lBoton.setVisibility(View.VISIBLE);
     }
@@ -175,6 +181,7 @@ public class VotacionFragment extends Fragment implements View.OnClickListener{
 
     private void cargarDatosProyecto() {
         gestorFirebase.recuperarProyecto(txtTitulo, txtDescripcion, imgLogo);
+        gestorFirebase.recuperarNumVotos(txtNumVeces);
     }
 
     private void comprobarVotante() {

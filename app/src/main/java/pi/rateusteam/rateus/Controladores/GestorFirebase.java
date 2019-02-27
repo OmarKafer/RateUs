@@ -220,6 +220,25 @@ public class GestorFirebase {
         });
     }
 
+    public void recuperarNumVotos(final TextView txtNumVeces) {
+        DatabaseReference database = FirebaseDatabase.getInstance().getReference("proyectos");
+        Query q = database.orderByChild("idUsuario").equalTo(getIdUsuario());
+        q.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for(DataSnapshot i: dataSnapshot.getChildren()) {
+                    Proyecto p = i.getValue(Proyecto.class);
+                    txtNumVeces.setText(p.getNumVotos() + activity.getResources().getString(R.string.numVeces));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+    }
+
     private void recuperarLogoProyecto(final ImageView imgLogo) {
         StorageReference mStorage = FirebaseStorage.getInstance().getReference().child("logos").child(getIdUsuario());
         mStorage.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
