@@ -41,6 +41,9 @@
         <item>Mecatrónica</item>
     </string-array>
 
+    <string name="dialogReiniciar">It may be necessary to restart the application for the changes to take effect.</string>
+
+
 
     //String fragment_login (Layout)
     <string name="txtEmailLogin">E-mail</string>

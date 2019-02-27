@@ -44,6 +44,8 @@
         <item>Mecatrónica</item>
     </string-array>
 
+    <string name="dialogReiniciar">Es posible que sea necesario reiniciar la aplicación para que los cambian tengan efecto.</string>
+
     <string name="txtEditarProyecto">Editar proyecto</string>
 
     //String fragment_login (Layout)

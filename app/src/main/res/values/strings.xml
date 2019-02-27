@@ -76,6 +76,8 @@
     //NO LO ENCUENTRO .--------------------------.
     <string name="spinnerCiclo">Seleccione un ciclo</string>
     <string name="primeroGrafica">Primero: </string>
+    <string name="dialogReiniciar">Es posible que sea necesario reiniciar la aplicación para que los cambian tengan efecto.</string>
+
 
 
     //String GestorFireBase (Controlador)
