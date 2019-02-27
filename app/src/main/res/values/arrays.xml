@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <resources>
+        <string-array name="ciclos">
+            <item>@string/spinnerCiclo</item>
+            <item>EDI</item>
+            <item>DAM</item>
+            <item>DAW</item>
+            <item>Márketing y publicidad</item>
+            <item>Videojuegos</item>
+            <item>Robótica</item>
+            <item>TAFAD</item>
+            <item>ASIR</item>
+            <item>GVEC</item>
+            <item>Mecatrónica</item>
+        </string-array>
+
+    </resources>
