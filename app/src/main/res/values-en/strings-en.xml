@@ -110,7 +110,7 @@
     </string-array>
 
 
-    <string name="numVotos">SO FAR YOU'VE BEEN VOTED </string>
+    <string name="numVotos">SO FAR YOU HAVE BEEN VOTED </string>
     <string name="numVeces"> TIMES</string>
 
     <string name="errorCampos">ERROR: Check the fields</string>
