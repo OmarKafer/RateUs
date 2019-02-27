@@ -109,6 +109,29 @@
 
         </LinearLayout>
 
+    <LinearLayout
+        android:id="@+id/lNumVotos"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:background="@drawable/btn_entrar">
+
+        <TextView
+            android:id="@+id/txtNumVotos"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numVotos"/>
+
+        <TextView
+            android:id="@+id/txtNumVeces"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/numVeces"/>
+
+    </LinearLayout>
+
         <LinearLayout
             android:id="@+id/lVotos"
             android:layout_width="match_parent"

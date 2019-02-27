@@ -16,6 +16,9 @@
     <string name="EditarProyecto">Editar proyecto</string>
     <string name="Cancelar"><b>Cancelar</b></string>
 
+    <string name="numVotos">HASTA AHORA TE HAN VOTADO </string>
+    <string name="numVeces"> VECES</string>
+
     //String fragment_editar (Layout)
     <string name="txtCrearProyecto2">CREAR PROYECTO</string>
     <string name="txtEmailEditar">Email</string>
@@ -88,7 +91,7 @@
     <string name="qrNoValido">QR no válido</string>
 
 
-    <string name="primeroGrafica">Primero:</string>
+    <string name="primeroGrafica">Primero: </string>
     <string name="Configuracio">Configuración</string>
 
 

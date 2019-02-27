@@ -11,6 +11,9 @@
         <item>Creatividad</item>
     </string-array>
 
+    <string name="numVotos">HASTA AHORA TE HAN VOTADO </string>
+    <string name="numVeces"> VECES</string>
+
     //String dialog_ajustes (Layout)
     <string name="cerrarSesion">Cerrar sesión</string>
     <string name="EditarProyecto">Editar proyecto</string>
@@ -72,7 +75,7 @@
 
     //NO LO ENCUENTRO .--------------------------.
     <string name="spinnerCiclo">Seleccione un ciclo</string>
-    <string name="primeroGrafica">Primero:</string>
+    <string name="primeroGrafica">Primero: </string>
 
 
     //String GestorFireBase (Controlador)

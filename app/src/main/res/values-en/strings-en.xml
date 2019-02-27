@@ -72,7 +72,7 @@
 
     //NO LO ENCUENTRO .--------------------------.
     <string name="spinnerCiclo">Seleccione un ciclo</string>
-    <string name="primeroGrafica">First:</string>
+    <string name="primeroGrafica">First: </string>
 
 
     //String GestorFireBase (Controlador)
@@ -110,6 +110,8 @@
     </string-array>
 
 
+    <string name="numVotos">SO FAR YOU'VE BEEN VOTED </string>
+    <string name="numVeces"> TIMES</string>
 
     <string name="errorCampos">ERROR: Check the fields</string>
     <string name="errorContrasenyas">ERROR: Passwords do not match</string>
